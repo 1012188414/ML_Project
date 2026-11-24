@@ -1,0 +1,23 @@
+{
+  "variant": "B",
+  "model_set": "B_image",
+  "backbone": "efficientnet_b3",
+  "folds": {
+    "0": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results\\models\\B_image\\efficientnet_b3\\fold0\\best.pt",
+      "rows_scored": 9771
+    },
+    "1": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results\\models\\B_image\\efficientnet_b3\\fold1\\best.pt",
+      "rows_scored": 9771
+    },
+    "2": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results\\models\\B_image\\efficientnet_b3\\fold2\\best.pt",
+      "rows_scored": 9780
+    },
+    "3": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results\\models\\B_image\\efficientnet_b3\\fold3\\best.pt",
+      "rows_scored": 9776
+    }
+  }
+}

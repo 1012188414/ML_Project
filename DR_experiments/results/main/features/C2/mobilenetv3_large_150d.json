@@ -1,0 +1,23 @@
+{
+  "variant": "C2",
+  "model_set": "C2_image",
+  "backbone": "mobilenetv3_large_150d",
+  "folds": {
+    "0": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results\\models\\C2_image\\mobilenetv3_large_150d\\fold0\\best.pt",
+      "rows_scored": 10575
+    },
+    "1": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results\\models\\C2_image\\mobilenetv3_large_150d\\fold1\\best.pt",
+      "rows_scored": 10575
+    },
+    "2": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results\\models\\C2_image\\mobilenetv3_large_150d\\fold2\\best.pt",
+      "rows_scored": 10602
+    },
+    "3": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results\\models\\C2_image\\mobilenetv3_large_150d\\fold3\\best.pt",
+      "rows_scored": 10590
+    }
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "lr:image": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.962
+    },
+    "intercept": -0.346
+  },
+  "lr:image+all": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.8673,
+      "age": 0.1072,
+      "diabetes_duration_y": 0.6774,
+      "sex": -0.4773,
+      "insulin": 0.7331,
+      "hypertension_record": -0.5826,
+      "sex_missing": 1.6567,
+      "diabetes_duration_y_missing": 0.6745,
+      "insulin_missing": -0.8608
+    },
+    "intercept": -0.3336
+  },
+  "lr:image+age": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.9745,
+      "age": -0.1317
+    },
+    "intercept": -0.3501
+  },
+  "lr:image+sex": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.9626,
+      "sex": -0.5385,
+      "sex_missing": 1.6799
+    },
+    "intercept": -0.0566
+  },
+  "lr:image+diabetes_duration_y": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.877,
+      "diabetes_duration_y": 0.7354,
+      "diabetes_duration_y_missing": 0.2649
+    },
+    "intercept": -0.4936
+  },
+  "lr:image+insulin": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.9285,
+      "insulin": 0.9495,
+      "insulin_missing": -0.8634
+    },
+    "intercept": -0.7613
+  },
+  "lr:image+hypertension_record": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.9755,
+      "hypertension_record": -0.5674
+    },
+    "intercept": -0.0859
+  },
+  "lr:image+all-age": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.8752,
+      "diabetes_duration_y": 0.6994,
+      "sex": -0.478,
+      "insulin": 0.6277,
+      "hypertension_record": -0.5159,
+      "sex_missing": 1.6135,
+      "diabetes_duration_y_missing": 0.6977,
+      "insulin_missing": -0.767
+    },
+    "intercept": -0.3309
+  },
+  "lr:image+all-sex": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.8706,
+      "age": 0.0978,
+      "diabetes_duration_y": 0.6763,
+      "insulin": 0.7636,
+      "hypertension_record": -0.6257,
+      "diabetes_duration_y_missing": 0.574,
+      "insulin_missing": -0.8509
+    },
+    "intercept": -0.5639
+  },
+  "lr:image+all-diabetes_duration_y": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.9058,
+      "age": 0.2919,
+      "sex": -0.4298,
+      "insulin": 1.0992,
+      "hypertension_record": -0.5797,
+      "sex_missing": 1.6094,
+      "insulin_missing": -1.0312
+    },
+    "intercept": -0.3129
+  },
+  "lr:image+all-insulin": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.8916,
+      "age": -0.0925,
+      "diabetes_duration_y": 0.7703,
+      "sex": -0.4993,
+      "hypertension_record": -0.5296,
+      "sex_missing": 1.5252,
+      "diabetes_duration_y_missing": 0.4503
+    },
+    "intercept": -0.0418
+  },
+  "lr:image+all-hypertension_record": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.8658,
+      "age": -0.0218,
+      "diabetes_duration_y": 0.6773,
+      "sex": -0.5144,
+      "insulin": 0.6987,
+      "sex_missing": 1.7184,
+      "diabetes_duration_y_missing": 0.678,
+      "insulin_missing": -0.7989
+    },
+    "intercept": -0.5782
+  }
+}

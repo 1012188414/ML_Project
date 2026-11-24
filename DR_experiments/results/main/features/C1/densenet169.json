@@ -1,0 +1,23 @@
+{
+  "variant": "C1",
+  "model_set": "C1_image",
+  "backbone": "densenet169",
+  "folds": {
+    "0": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results\\models\\C1_image\\densenet169\\fold0\\best.pt",
+      "rows_scored": 9771
+    },
+    "1": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results\\models\\C1_image\\densenet169\\fold1\\best.pt",
+      "rows_scored": 9771
+    },
+    "2": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results\\models\\C1_image\\densenet169\\fold2\\best.pt",
+      "rows_scored": 9780
+    },
+    "3": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results\\models\\C1_image\\densenet169\\fold3\\best.pt",
+      "rows_scored": 9776
+    }
+  }
+}

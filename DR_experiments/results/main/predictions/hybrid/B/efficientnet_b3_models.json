@@ -1,0 +1,24 @@
+{
+  "lr:image": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 2.0748
+    },
+    "intercept": -0.4983
+  },
+  "lr:image+all": {
+    "C": 1.0,
+    "coefficients": {
+      "image_logit": 1.9729,
+      "age": 0.1454,
+      "diabetes_duration_y": 0.6271,
+      "sex": -0.4668,
+      "insulin": 0.774,
+      "hypertension_record": -0.6663,
+      "sex_missing": 1.3348,
+      "diabetes_duration_y_missing": 0.7901,
+      "insulin_missing": -0.9615
+    },
+    "intercept": -0.459
+  }
+}

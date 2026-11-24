@@ -1,0 +1,48 @@
+{
+  "lr": {
+    "features": [
+      "age",
+      "diabetes_duration_y",
+      "sex",
+      "insulin",
+      "hypertension_record",
+      "sex_missing",
+      "diabetes_duration_y_missing",
+      "insulin_missing"
+    ],
+    "coefficients": {
+      "age": 0.3261,
+      "diabetes_duration_y": 0.8086,
+      "sex": -0.5959,
+      "insulin": 1.1268,
+      "hypertension_record": -0.5979,
+      "sex_missing": 1.203,
+      "diabetes_duration_y_missing": 0.5431,
+      "insulin_missing": -0.9005
+    }
+  },
+  "rf": {
+    "features": [
+      "age",
+      "diabetes_duration_y",
+      "sex",
+      "insulin",
+      "hypertension_record",
+      "sex_missing",
+      "diabetes_duration_y_missing",
+      "insulin_missing"
+    ]
+  },
+  "xgb": {
+    "features": [
+      "age",
+      "diabetes_duration_y",
+      "sex",
+      "insulin",
+      "hypertension_record",
+      "sex_missing",
+      "diabetes_duration_y_missing",
+      "insulin_missing"
+    ]
+  }
+}

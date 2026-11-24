@@ -1,0 +1,23 @@
+{
+  "variant": "C2",
+  "model_set": "C2_image",
+  "backbone": "pvt_v2_b1",
+  "folds": {
+    "0": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results_pvt\\models\\C2_image\\pvt_v2_b1\\fold0\\best.pt",
+      "rows_scored": 10575
+    },
+    "1": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results_pvt\\models\\C2_image\\pvt_v2_b1\\fold1\\best.pt",
+      "rows_scored": 10575
+    },
+    "2": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results_pvt\\models\\C2_image\\pvt_v2_b1\\fold2\\best.pt",
+      "rows_scored": 10602
+    },
+    "3": {
+      "checkpoint": "C:\\Users\\10121\\Desktop\\DR_experiments_v4\\DR_experiments_v2\\results_pvt\\models\\C2_image\\pvt_v2_b1\\fold3\\best.pt",
+      "rows_scored": 10590
+    }
+  }
+}
