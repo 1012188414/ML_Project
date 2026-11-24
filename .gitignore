@@ -1,7 +1,4 @@
-**/data/
-**/weights/
-**/predictions/
-**/features/
+**/data/cache/*.npy
 .idea/
 __pycache__/
 *.pyc
