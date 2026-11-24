@@ -1,0 +1,214 @@
+{
+  "config": {
+    "model_set": "B_image",
+    "experiment": "B",
+    "setting": "image",
+    "clinical": "none",
+    "aug": "none",
+    "backbone": "mobilenetv3_large_150d",
+    "fold": 2,
+    "pretrained_weights": "mobilenetv3_large_150d.ra4_e3600_r256_in1k",
+    "image_size": 384,
+    "normalization": {
+      "mean": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "std": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "unfrozen_modules": [
+      "blocks.5.3"
+    ],
+    "encoder_parameters": 13341320,
+    "encoder_trainable_parameters": 1772040,
+    "clinical_features": null,
+    "clinical_preprocessing": null,
+    "train_images": 1211,
+    "train_dr_positive": 336,
+    "val_images": 380,
+    "epochs_max": 30,
+    "warmup_epochs": 2,
+    "patience": 6,
+    "min_ap_gain": 0.005,
+    "early_stopping": "clean validation AP",
+    "batch_size": 32,
+    "encoder_lr": 0.0001,
+    "head_lr": 0.001,
+    "weight_decay": 0.0001,
+    "pos_weight": 2.6041666666666665,
+    "seed": 42,
+    "device": "cuda",
+    "torch_version": "2.10.0+cu128",
+    "timm_version": "1.0.31"
+  },
+  "best_validation": {
+    "epoch": 11,
+    "phase": "fine-tune",
+    "train_loss": 0.21817734810461395,
+    "ap": 0.8670728030920862,
+    "roc_auc": 0.9273469067514023,
+    "val_degraded_ap": 0.6329294021206661,
+    "seconds": 5.2
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "phase": "warm-up",
+      "train_loss": 0.9219348759418868,
+      "ap": 0.7346871216119116,
+      "roc_auc": 0.835863638146797,
+      "val_degraded_ap": 0.5044655555915062,
+      "seconds": 92.0
+    },
+    {
+      "epoch": 2,
+      "phase": "warm-up",
+      "train_loss": 0.7000491002883722,
+      "ap": 0.7747708247343169,
+      "roc_auc": 0.8873720136518771,
+      "val_degraded_ap": 0.5301026376773746,
+      "seconds": 4.6
+    },
+    {
+      "epoch": 3,
+      "phase": "fine-tune",
+      "train_loss": 0.6400192852949526,
+      "ap": 0.8033112178870924,
+      "roc_auc": 0.9041818681103135,
+      "val_degraded_ap": 0.584580272255012,
+      "seconds": 4.8
+    },
+    {
+      "epoch": 4,
+      "phase": "fine-tune",
+      "train_loss": 0.6317321122135632,
+      "ap": 0.8426935160111014,
+      "roc_auc": 0.926778078537523,
+      "val_degraded_ap": 0.6089562335403356,
+      "seconds": 4.8
+    },
+    {
+      "epoch": 5,
+      "phase": "fine-tune",
+      "train_loss": 0.5097090754993291,
+      "ap": 0.8526781046630877,
+      "roc_auc": 0.9307794908006748,
+      "val_degraded_ap": 0.6200915564729267,
+      "seconds": 5.3
+    },
+    {
+      "epoch": 6,
+      "phase": "fine-tune",
+      "train_loss": 0.4324925971562758,
+      "ap": 0.8477377861802602,
+      "roc_auc": 0.9241693146600761,
+      "val_degraded_ap": 0.6358037050846904,
+      "seconds": 4.8
+    },
+    {
+      "epoch": 7,
+      "phase": "fine-tune",
+      "train_loss": 0.34083344186267805,
+      "ap": 0.8370057529278581,
+      "roc_auc": 0.9045741634302302,
+      "val_degraded_ap": 0.6052202203157707,
+      "seconds": 4.9
+    },
+    {
+      "epoch": 8,
+      "phase": "fine-tune",
+      "train_loss": 0.2185293460660095,
+      "ap": 0.8422931636126451,
+      "roc_auc": 0.9181475814993527,
+      "val_degraded_ap": 0.587458242113075,
+      "seconds": 5.0
+    },
+    {
+      "epoch": 9,
+      "phase": "fine-tune",
+      "train_loss": 0.15762729786527147,
+      "ap": 0.83661613090535,
+      "roc_auc": 0.9236985602761758,
+      "val_degraded_ap": 0.6034325397814433,
+      "seconds": 4.9
+    },
+    {
+      "epoch": 10,
+      "phase": "fine-tune",
+      "train_loss": 0.23328659851427022,
+      "ap": 0.8553718498834063,
+      "roc_auc": 0.9313875485465458,
+      "val_degraded_ap": 0.6066982109507063,
+      "seconds": 4.9
+    },
+    {
+      "epoch": 11,
+      "phase": "fine-tune",
+      "train_loss": 0.21817734810461395,
+      "ap": 0.8670728030920862,
+      "roc_auc": 0.9273469067514023,
+      "val_degraded_ap": 0.6329294021206661,
+      "seconds": 5.2
+    },
+    {
+      "epoch": 12,
+      "phase": "fine-tune",
+      "train_loss": 0.047032363349794847,
+      "ap": 0.8624094570687026,
+      "roc_auc": 0.9262680946216312,
+      "val_degraded_ap": 0.6332738144571055,
+      "seconds": 5.0
+    },
+    {
+      "epoch": 13,
+      "phase": "fine-tune",
+      "train_loss": 0.039448411281595146,
+      "ap": 0.8546794858360146,
+      "roc_auc": 0.9188929426071947,
+      "val_degraded_ap": 0.601203712860385,
+      "seconds": 4.9
+    },
+    {
+      "epoch": 14,
+      "phase": "fine-tune",
+      "train_loss": 0.2675627276092202,
+      "ap": 0.8358978333524014,
+      "roc_auc": 0.9199129104389785,
+      "val_degraded_ap": 0.6266781687277276,
+      "seconds": 5.3
+    },
+    {
+      "epoch": 15,
+      "phase": "fine-tune",
+      "train_loss": 0.03631397754470737,
+      "ap": 0.8467419223838579,
+      "roc_auc": 0.9207759601427955,
+      "val_degraded_ap": 0.6296441361634966,
+      "seconds": 4.9
+    },
+    {
+      "epoch": 16,
+      "phase": "fine-tune",
+      "train_loss": 0.0071173604119424486,
+      "ap": 0.8514065708180683,
+      "roc_auc": 0.9207563453767996,
+      "val_degraded_ap": 0.6365296910086836,
+      "seconds": 5.0
+    },
+    {
+      "epoch": 17,
+      "phase": "fine-tune",
+      "train_loss": 0.002659255861743829,
+      "ap": 0.8537260758694198,
+      "roc_auc": 0.921442862186654,
+      "val_degraded_ap": 0.6361829635477194,
+      "seconds": 5.0
+    }
+  ],
+  "total_seconds": 171.9
+}

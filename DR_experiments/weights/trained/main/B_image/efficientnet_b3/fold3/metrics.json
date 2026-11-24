@@ -1,0 +1,161 @@
+{
+  "config": {
+    "model_set": "B_image",
+    "experiment": "B",
+    "setting": "image",
+    "clinical": "none",
+    "aug": "none",
+    "backbone": "efficientnet_b3",
+    "fold": 3,
+    "pretrained_weights": "efficientnet_b3.ra2_in1k",
+    "image_size": 384,
+    "normalization": {
+      "mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "std": [
+        0.229,
+        0.224,
+        0.225
+      ]
+    },
+    "unfrozen_modules": [
+      "blocks.6.1",
+      "bn2"
+    ],
+    "encoder_parameters": 10696232,
+    "encoder_trainable_parameters": 2248032,
+    "clinical_features": null,
+    "clinical_preprocessing": null,
+    "train_images": 1215,
+    "train_dr_positive": 347,
+    "val_images": 380,
+    "epochs_max": 30,
+    "warmup_epochs": 2,
+    "patience": 6,
+    "min_ap_gain": 0.005,
+    "early_stopping": "clean validation AP",
+    "batch_size": 32,
+    "encoder_lr": 0.0001,
+    "head_lr": 0.001,
+    "weight_decay": 0.0001,
+    "pos_weight": 2.5014409221902016,
+    "seed": 42,
+    "device": "cuda",
+    "torch_version": "2.10.0+cu128",
+    "timm_version": "1.0.31"
+  },
+  "best_validation": {
+    "epoch": 5,
+    "phase": "fine-tune",
+    "train_loss": 0.5290371113843879,
+    "ap": 0.8638759642478064,
+    "roc_auc": 0.9391942254128909,
+    "val_degraded_ap": 0.6295217394196947,
+    "seconds": 6.9
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "phase": "warm-up",
+      "train_loss": 1.1682423281571501,
+      "ap": 0.6955206829451916,
+      "roc_auc": 0.8641285159468047,
+      "val_degraded_ap": 0.4655650565762348,
+      "seconds": 94.4
+    },
+    {
+      "epoch": 2,
+      "phase": "warm-up",
+      "train_loss": 0.7346364213605967,
+      "ap": 0.7323859076629479,
+      "roc_auc": 0.8886862029735985,
+      "val_degraded_ap": 0.49275966236745944,
+      "seconds": 6.5
+    },
+    {
+      "epoch": 3,
+      "phase": "fine-tune",
+      "train_loss": 0.646205924077289,
+      "ap": 0.7955448574942237,
+      "roc_auc": 0.9113216429327999,
+      "val_degraded_ap": 0.6480475001741148,
+      "seconds": 6.8
+    },
+    {
+      "epoch": 4,
+      "phase": "fine-tune",
+      "train_loss": 0.5318438243473508,
+      "ap": 0.8525913081802863,
+      "roc_auc": 0.9340551567219804,
+      "val_degraded_ap": 0.6155440533461554,
+      "seconds": 7.1
+    },
+    {
+      "epoch": 5,
+      "phase": "fine-tune",
+      "train_loss": 0.5290371113843879,
+      "ap": 0.8638759642478064,
+      "roc_auc": 0.9391942254128909,
+      "val_degraded_ap": 0.6295217394196947,
+      "seconds": 6.9
+    },
+    {
+      "epoch": 6,
+      "phase": "fine-tune",
+      "train_loss": 0.38517998589409724,
+      "ap": 0.8485585463998241,
+      "roc_auc": 0.9160880310697893,
+      "val_degraded_ap": 0.6340701260555154,
+      "seconds": 7.2
+    },
+    {
+      "epoch": 7,
+      "phase": "fine-tune",
+      "train_loss": 0.3378357435940715,
+      "ap": 0.856345504627072,
+      "roc_auc": 0.9260719469616728,
+      "val_degraded_ap": 0.6451931162858912,
+      "seconds": 6.9
+    },
+    {
+      "epoch": 8,
+      "phase": "fine-tune",
+      "train_loss": 0.22732199837641462,
+      "ap": 0.8600671964155325,
+      "roc_auc": 0.9147934565140636,
+      "val_degraded_ap": 0.6527765003113031,
+      "seconds": 7.0
+    },
+    {
+      "epoch": 9,
+      "phase": "fine-tune",
+      "train_loss": 0.19662770714779448,
+      "ap": 0.8343966377487583,
+      "roc_auc": 0.906457180965831,
+      "val_degraded_ap": 0.6611175349067566,
+      "seconds": 6.9
+    },
+    {
+      "epoch": 10,
+      "phase": "fine-tune",
+      "train_loss": 0.14546127005369083,
+      "ap": 0.8418898755627364,
+      "roc_auc": 0.9046918520262054,
+      "val_degraded_ap": 0.6572234931854595,
+      "seconds": 6.9
+    },
+    {
+      "epoch": 11,
+      "phase": "fine-tune",
+      "train_loss": 0.11582258562001672,
+      "ap": 0.8598904740848712,
+      "roc_auc": 0.9184418029892903,
+      "val_degraded_ap": 0.6421232198155156,
+      "seconds": 7.0
+    }
+  ],
+  "total_seconds": 164.0
+}
