@@ -1,0 +1,804 @@
+=== run_all 2026-11-22 22:22 | stages ['check', 'cache', 'B', 'C', 'D', 'evaluate'] | backbones ['pvt_v2_b1'] | smoke False | test performance computed at the end | code 66bd61f7dc6b269c/310b4fcdb9031579 | stale: train -, downstream - | results C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\results_pvt
+
+=================== stage check ===================
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\check_data.py
+NOTE: 3 patient(s) with contradictory sex in BRSET (6 photos; patients ['1205', '126', '146']); set to missing for these patients.
+NOTE: 1 patient(s) with contradictory age in BRSET (3 photos; patients ['1547']); set to missing for these patients.
+NOTE: 17 inadequate-set patients also have photos in the test split (no overlap with train / val); report the inadequate set as a same-source supplementary low-quality test set.
+inadequate    109 photos    68 patients    18 DR-positive (16.5%)
+test          365 photos   198 patients   105 DR-positive (28.8%)
+train        1622 photos   889 patients   457 DR-positive (28.2%)
+val           380 photos   203 patients    87 DR-positive (22.9%)
+training folds: {0: 402, 1: 402, 2: 411, 3: 407}
+data check passed
+--- done in 2s
+
+=================== stage cache ===================
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\build_cache.py --workers 4
+base cache up to date (2476 photos)
+test cache up to date (5840 photo x condition rows)
+--- done in 3s
+
+=================== stage B ===================
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\train.py --model-set B_image --backbones pvt_v2_b1 --device auto --workers 4
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+B_image pvt_v2_b1 fold 0: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.7936, val AP 0.7844, ROC-AUC 0.9075, degraded-val AP 0.6672
+  epoch  2 (warm-up): train loss 0.6684, val AP 0.8211, ROC-AUC 0.9189, degraded-val AP 0.6936
+  epoch  3 (fine-tune): train loss 0.6739, val AP 0.8197, ROC-AUC 0.9215, degraded-val AP 0.7141
+  epoch  4 (fine-tune): train loss 0.6609, val AP 0.8296, ROC-AUC 0.9272, degraded-val AP 0.7104
+  epoch  5 (fine-tune): train loss 0.5132, val AP 0.8249, ROC-AUC 0.9112, degraded-val AP 0.7107
+  epoch  6 (fine-tune): train loss 0.4640, val AP 0.8459, ROC-AUC 0.9197, degraded-val AP 0.7134
+  epoch  7 (fine-tune): train loss 0.4144, val AP 0.8354, ROC-AUC 0.9160, degraded-val AP 0.7163
+  epoch  8 (fine-tune): train loss 0.3431, val AP 0.8230, ROC-AUC 0.8854, degraded-val AP 0.6880
+  epoch  9 (fine-tune): train loss 0.3034, val AP 0.8286, ROC-AUC 0.8994, degraded-val AP 0.7142
+  epoch 10 (fine-tune): train loss 0.3043, val AP 0.8465, ROC-AUC 0.9153, degraded-val AP 0.7015
+  epoch 11 (fine-tune): train loss 0.2012, val AP 0.8272, ROC-AUC 0.8995, degraded-val AP 0.6714
+  epoch 12 (fine-tune): train loss 0.1263, val AP 0.8209, ROC-AUC 0.9102, degraded-val AP 0.6749
+  best: epoch 10, val AP 0.8465 (155s)
+B_image pvt_v2_b1 fold 1: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.8421, val AP 0.7577, ROC-AUC 0.8879, degraded-val AP 0.6718
+  epoch  2 (warm-up): train loss 0.6326, val AP 0.8054, ROC-AUC 0.9103, degraded-val AP 0.6947
+  epoch  3 (fine-tune): train loss 0.7212, val AP 0.7929, ROC-AUC 0.9020, degraded-val AP 0.7150
+  epoch  4 (fine-tune): train loss 0.6248, val AP 0.8112, ROC-AUC 0.9122, degraded-val AP 0.7196
+  epoch  5 (fine-tune): train loss 0.4915, val AP 0.8370, ROC-AUC 0.9188, degraded-val AP 0.6756
+  epoch  6 (fine-tune): train loss 0.4643, val AP 0.8376, ROC-AUC 0.9201, degraded-val AP 0.7010
+  epoch  7 (fine-tune): train loss 0.3649, val AP 0.8418, ROC-AUC 0.9143, degraded-val AP 0.7078
+  epoch  8 (fine-tune): train loss 0.3564, val AP 0.8323, ROC-AUC 0.9173, degraded-val AP 0.6931
+  epoch  9 (fine-tune): train loss 0.2486, val AP 0.8288, ROC-AUC 0.9002, degraded-val AP 0.6937
+  epoch 10 (fine-tune): train loss 0.2590, val AP 0.8344, ROC-AUC 0.9167, degraded-val AP 0.6900
+  epoch 11 (fine-tune): train loss 0.2289, val AP 0.8265, ROC-AUC 0.9005, degraded-val AP 0.6864
+  best: epoch 7, val AP 0.8418 (145s)
+B_image pvt_v2_b1 fold 2: 1211 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.9657, val AP 0.7420, ROC-AUC 0.8719, degraded-val AP 0.6781
+  epoch  2 (warm-up): train loss 0.6944, val AP 0.8070, ROC-AUC 0.9145, degraded-val AP 0.6611
+  epoch  3 (fine-tune): train loss 0.6699, val AP 0.8160, ROC-AUC 0.9138, degraded-val AP 0.7031
+  epoch  4 (fine-tune): train loss 0.5643, val AP 0.8198, ROC-AUC 0.9167, degraded-val AP 0.6684
+  epoch  5 (fine-tune): train loss 0.4872, val AP 0.8485, ROC-AUC 0.9277, degraded-val AP 0.6935
+  epoch  6 (fine-tune): train loss 0.4889, val AP 0.8076, ROC-AUC 0.9004, degraded-val AP 0.6643
+  epoch  7 (fine-tune): train loss 0.4028, val AP 0.8286, ROC-AUC 0.9113, degraded-val AP 0.7012
+  epoch  8 (fine-tune): train loss 0.2970, val AP 0.8325, ROC-AUC 0.9175, degraded-val AP 0.6690
+  epoch  9 (fine-tune): train loss 0.2355, val AP 0.8139, ROC-AUC 0.8967, degraded-val AP 0.6786
+  epoch 10 (fine-tune): train loss 0.2731, val AP 0.8317, ROC-AUC 0.9318, degraded-val AP 0.6838
+  epoch 11 (fine-tune): train loss 0.1895, val AP 0.8321, ROC-AUC 0.9053, degraded-val AP 0.6750
+  best: epoch 5, val AP 0.8485 (144s)
+B_image pvt_v2_b1 fold 3: 1215 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.8847, val AP 0.7517, ROC-AUC 0.8856, degraded-val AP 0.6680
+  epoch  2 (warm-up): train loss 0.6719, val AP 0.7959, ROC-AUC 0.9125, degraded-val AP 0.6740
+  epoch  3 (fine-tune): train loss 0.6265, val AP 0.7965, ROC-AUC 0.8990, degraded-val AP 0.7103
+  epoch  4 (fine-tune): train loss 0.5518, val AP 0.8266, ROC-AUC 0.9131, degraded-val AP 0.6851
+  epoch  5 (fine-tune): train loss 0.5937, val AP 0.8404, ROC-AUC 0.9269, degraded-val AP 0.7244
+  epoch  6 (fine-tune): train loss 0.4554, val AP 0.8379, ROC-AUC 0.9185, degraded-val AP 0.7042
+  epoch  7 (fine-tune): train loss 0.4376, val AP 0.8416, ROC-AUC 0.9316, degraded-val AP 0.7008
+  epoch  8 (fine-tune): train loss 0.3377, val AP 0.8430, ROC-AUC 0.9155, degraded-val AP 0.6982
+  epoch  9 (fine-tune): train loss 0.2642, val AP 0.8370, ROC-AUC 0.9137, degraded-val AP 0.6695
+  epoch 10 (fine-tune): train loss 0.2609, val AP 0.8203, ROC-AUC 0.9050, degraded-val AP 0.6780
+  epoch 11 (fine-tune): train loss 0.1938, val AP 0.8540, ROC-AUC 0.9239, degraded-val AP 0.6873
+  epoch 12 (fine-tune): train loss 0.1066, val AP 0.8541, ROC-AUC 0.9293, degraded-val AP 0.6621
+  epoch 13 (fine-tune): train loss 0.0957, val AP 0.8491, ROC-AUC 0.9209, degraded-val AP 0.6721
+  epoch 14 (fine-tune): train loss 0.0730, val AP 0.8461, ROC-AUC 0.9197, degraded-val AP 0.6672
+  epoch 15 (fine-tune): train loss 0.0181, val AP 0.8593, ROC-AUC 0.9328, degraded-val AP 0.6436
+  epoch 16 (fine-tune): train loss 0.0051, val AP 0.8528, ROC-AUC 0.9283, degraded-val AP 0.6540
+  epoch 17 (fine-tune): train loss 0.0022, val AP 0.8531, ROC-AUC 0.9302, degraded-val AP 0.6466
+  epoch 18 (fine-tune): train loss 0.0014, val AP 0.8565, ROC-AUC 0.9323, degraded-val AP 0.6451
+  epoch 19 (fine-tune): train loss 0.0011, val AP 0.8540, ROC-AUC 0.9301, degraded-val AP 0.6499
+  epoch 20 (fine-tune): train loss 0.0009, val AP 0.8540, ROC-AUC 0.9307, degraded-val AP 0.6490
+  epoch 21 (fine-tune): train loss 0.0008, val AP 0.8535, ROC-AUC 0.9303, degraded-val AP 0.6493
+  best: epoch 15, val AP 0.8593 (200s)
+--- done in 673s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\train.py --model-set B_clin --backbones pvt_v2_b1 --device auto --workers 4
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+B_clin pvt_v2_b1 fold 0: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.7917, val AP 0.7901, ROC-AUC 0.9108, degraded-val AP 0.6746
+  epoch  2 (warm-up): train loss 0.6635, val AP 0.8272, ROC-AUC 0.9233, degraded-val AP 0.7073
+  epoch  3 (fine-tune): train loss 0.6651, val AP 0.8280, ROC-AUC 0.9267, degraded-val AP 0.7253
+  epoch  4 (fine-tune): train loss 0.6480, val AP 0.8381, ROC-AUC 0.9311, degraded-val AP 0.7237
+  epoch  5 (fine-tune): train loss 0.5029, val AP 0.8301, ROC-AUC 0.9154, degraded-val AP 0.7252
+  epoch  6 (fine-tune): train loss 0.4479, val AP 0.8511, ROC-AUC 0.9221, degraded-val AP 0.7232
+  epoch  7 (fine-tune): train loss 0.4034, val AP 0.8442, ROC-AUC 0.9209, degraded-val AP 0.7321
+  epoch  8 (fine-tune): train loss 0.3127, val AP 0.8284, ROC-AUC 0.8916, degraded-val AP 0.7124
+  epoch  9 (fine-tune): train loss 0.2491, val AP 0.8334, ROC-AUC 0.9001, degraded-val AP 0.7236
+  epoch 10 (fine-tune): train loss 0.2070, val AP 0.8420, ROC-AUC 0.9108, degraded-val AP 0.7013
+  epoch 11 (fine-tune): train loss 0.1691, val AP 0.8361, ROC-AUC 0.9066, degraded-val AP 0.6999
+  epoch 12 (fine-tune): train loss 0.1111, val AP 0.8151, ROC-AUC 0.9064, degraded-val AP 0.6944
+  best: epoch 6, val AP 0.8511 (152s)
+B_clin pvt_v2_b1 fold 1: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.8393, val AP 0.7631, ROC-AUC 0.8919, degraded-val AP 0.6788
+  epoch  2 (warm-up): train loss 0.6258, val AP 0.8095, ROC-AUC 0.9129, degraded-val AP 0.7037
+  epoch  3 (fine-tune): train loss 0.7130, val AP 0.7999, ROC-AUC 0.9082, degraded-val AP 0.7329
+  epoch  4 (fine-tune): train loss 0.6128, val AP 0.8188, ROC-AUC 0.9167, degraded-val AP 0.7370
+  epoch  5 (fine-tune): train loss 0.4783, val AP 0.8436, ROC-AUC 0.9227, degraded-val AP 0.6917
+  epoch  6 (fine-tune): train loss 0.4526, val AP 0.8442, ROC-AUC 0.9211, degraded-val AP 0.7204
+  epoch  7 (fine-tune): train loss 0.3549, val AP 0.8451, ROC-AUC 0.9134, degraded-val AP 0.7184
+  epoch  8 (fine-tune): train loss 0.3469, val AP 0.8408, ROC-AUC 0.9204, degraded-val AP 0.7095
+  epoch  9 (fine-tune): train loss 0.2272, val AP 0.8369, ROC-AUC 0.9062, degraded-val AP 0.7125
+  epoch 10 (fine-tune): train loss 0.2303, val AP 0.8407, ROC-AUC 0.9205, degraded-val AP 0.7046
+  epoch 11 (fine-tune): train loss 0.1830, val AP 0.8297, ROC-AUC 0.9025, degraded-val AP 0.7114
+  best: epoch 7, val AP 0.8451 (145s)
+B_clin pvt_v2_b1 fold 2: 1211 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.9635, val AP 0.7495, ROC-AUC 0.8784, degraded-val AP 0.6883
+  epoch  2 (warm-up): train loss 0.6874, val AP 0.8143, ROC-AUC 0.9187, degraded-val AP 0.6697
+  epoch  3 (fine-tune): train loss 0.6618, val AP 0.8218, ROC-AUC 0.9180, degraded-val AP 0.7130
+  epoch  4 (fine-tune): train loss 0.5544, val AP 0.8286, ROC-AUC 0.9195, degraded-val AP 0.6759
+  epoch  5 (fine-tune): train loss 0.4780, val AP 0.8532, ROC-AUC 0.9304, degraded-val AP 0.7030
+  epoch  6 (fine-tune): train loss 0.4727, val AP 0.8177, ROC-AUC 0.9060, degraded-val AP 0.6800
+  epoch  7 (fine-tune): train loss 0.3867, val AP 0.8354, ROC-AUC 0.9133, degraded-val AP 0.7093
+  epoch  8 (fine-tune): train loss 0.2959, val AP 0.8390, ROC-AUC 0.9197, degraded-val AP 0.6818
+  epoch  9 (fine-tune): train loss 0.2195, val AP 0.8175, ROC-AUC 0.8946, degraded-val AP 0.6910
+  epoch 10 (fine-tune): train loss 0.2215, val AP 0.8349, ROC-AUC 0.9279, degraded-val AP 0.6931
+  epoch 11 (fine-tune): train loss 0.1834, val AP 0.8299, ROC-AUC 0.9062, degraded-val AP 0.6847
+  best: epoch 5, val AP 0.8532 (145s)
+B_clin pvt_v2_b1 fold 3: 1215 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.8820, val AP 0.7585, ROC-AUC 0.8908, degraded-val AP 0.6793
+  epoch  2 (warm-up): train loss 0.6664, val AP 0.8038, ROC-AUC 0.9164, degraded-val AP 0.6858
+  epoch  3 (fine-tune): train loss 0.6183, val AP 0.8034, ROC-AUC 0.9038, degraded-val AP 0.7226
+  epoch  4 (fine-tune): train loss 0.5443, val AP 0.8357, ROC-AUC 0.9185, degraded-val AP 0.6990
+  epoch  5 (fine-tune): train loss 0.5825, val AP 0.8478, ROC-AUC 0.9303, degraded-val AP 0.7371
+  epoch  6 (fine-tune): train loss 0.4462, val AP 0.8439, ROC-AUC 0.9214, degraded-val AP 0.7183
+  epoch  7 (fine-tune): train loss 0.4245, val AP 0.8465, ROC-AUC 0.9329, degraded-val AP 0.7117
+  epoch  8 (fine-tune): train loss 0.3293, val AP 0.8513, ROC-AUC 0.9209, degraded-val AP 0.7148
+  epoch  9 (fine-tune): train loss 0.2562, val AP 0.8416, ROC-AUC 0.9155, degraded-val AP 0.6862
+  epoch 10 (fine-tune): train loss 0.2519, val AP 0.8287, ROC-AUC 0.9074, degraded-val AP 0.6900
+  epoch 11 (fine-tune): train loss 0.1910, val AP 0.8596, ROC-AUC 0.9262, degraded-val AP 0.7041
+  epoch 12 (fine-tune): train loss 0.1031, val AP 0.8612, ROC-AUC 0.9332, degraded-val AP 0.6901
+  epoch 13 (fine-tune): train loss 0.0797, val AP 0.8492, ROC-AUC 0.9230, degraded-val AP 0.6857
+  epoch 14 (fine-tune): train loss 0.0537, val AP 0.8536, ROC-AUC 0.9282, degraded-val AP 0.6840
+  epoch 15 (fine-tune): train loss 0.0313, val AP 0.8649, ROC-AUC 0.9344, degraded-val AP 0.6862
+  epoch 16 (fine-tune): train loss 0.0097, val AP 0.8639, ROC-AUC 0.9382, degraded-val AP 0.6722
+  epoch 17 (fine-tune): train loss 0.0029, val AP 0.8610, ROC-AUC 0.9354, degraded-val AP 0.6699
+  epoch 18 (fine-tune): train loss 0.0015, val AP 0.8587, ROC-AUC 0.9350, degraded-val AP 0.6682
+  epoch 19 (fine-tune): train loss 0.0012, val AP 0.8580, ROC-AUC 0.9347, degraded-val AP 0.6690
+  epoch 20 (fine-tune): train loss 0.0010, val AP 0.8571, ROC-AUC 0.9344, degraded-val AP 0.6711
+  epoch 21 (fine-tune): train loss 0.0009, val AP 0.8580, ROC-AUC 0.9345, degraded-val AP 0.6703
+  best: epoch 15, val AP 0.8649 (201s)
+--- done in 665s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\train.py --model-set B_shuf --backbones pvt_v2_b1 --device auto --workers 4
+B_shuf pvt_v2_b1 fold 0: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.7924, val AP 0.7865, ROC-AUC 0.9073, degraded-val AP 0.6710
+  epoch  2 (warm-up): train loss 0.6674, val AP 0.8214, ROC-AUC 0.9187, degraded-val AP 0.6963
+  epoch  3 (fine-tune): train loss 0.6756, val AP 0.8211, ROC-AUC 0.9221, degraded-val AP 0.7142
+  epoch  4 (fine-tune): train loss 0.6566, val AP 0.8340, ROC-AUC 0.9277, degraded-val AP 0.7115
+  epoch  5 (fine-tune): train loss 0.5172, val AP 0.8265, ROC-AUC 0.9122, degraded-val AP 0.7132
+  epoch  6 (fine-tune): train loss 0.4602, val AP 0.8460, ROC-AUC 0.9193, degraded-val AP 0.7146
+  epoch  7 (fine-tune): train loss 0.4139, val AP 0.8358, ROC-AUC 0.9169, degraded-val AP 0.7161
+  epoch  8 (fine-tune): train loss 0.3337, val AP 0.8233, ROC-AUC 0.8855, degraded-val AP 0.6865
+  epoch  9 (fine-tune): train loss 0.2847, val AP 0.8305, ROC-AUC 0.8977, degraded-val AP 0.7126
+  epoch 10 (fine-tune): train loss 0.2355, val AP 0.8481, ROC-AUC 0.9143, degraded-val AP 0.6851
+  epoch 11 (fine-tune): train loss 0.1810, val AP 0.8345, ROC-AUC 0.9001, degraded-val AP 0.6688
+  epoch 12 (fine-tune): train loss 0.0953, val AP 0.8163, ROC-AUC 0.9092, degraded-val AP 0.6776
+  best: epoch 10, val AP 0.8481 (152s)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+B_shuf pvt_v2_b1 fold 1: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.8454, val AP 0.7554, ROC-AUC 0.8856, degraded-val AP 0.6694
+  epoch  2 (warm-up): train loss 0.6330, val AP 0.8060, ROC-AUC 0.9099, degraded-val AP 0.6954
+  epoch  3 (fine-tune): train loss 0.7224, val AP 0.7916, ROC-AUC 0.9000, degraded-val AP 0.7160
+  epoch  4 (fine-tune): train loss 0.6256, val AP 0.8110, ROC-AUC 0.9109, degraded-val AP 0.7201
+  epoch  5 (fine-tune): train loss 0.4915, val AP 0.8389, ROC-AUC 0.9190, degraded-val AP 0.6756
+  epoch  6 (fine-tune): train loss 0.4651, val AP 0.8372, ROC-AUC 0.9192, degraded-val AP 0.7006
+  epoch  7 (fine-tune): train loss 0.3642, val AP 0.8419, ROC-AUC 0.9135, degraded-val AP 0.7085
+  epoch  8 (fine-tune): train loss 0.3577, val AP 0.8353, ROC-AUC 0.9183, degraded-val AP 0.6948
+  epoch  9 (fine-tune): train loss 0.2495, val AP 0.8299, ROC-AUC 0.9006, degraded-val AP 0.6920
+  epoch 10 (fine-tune): train loss 0.2701, val AP 0.8360, ROC-AUC 0.9175, degraded-val AP 0.6848
+  epoch 11 (fine-tune): train loss 0.2219, val AP 0.8343, ROC-AUC 0.9052, degraded-val AP 0.6859
+  best: epoch 7, val AP 0.8419 (145s)
+B_shuf pvt_v2_b1 fold 2: 1211 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.9646, val AP 0.7360, ROC-AUC 0.8670, degraded-val AP 0.6689
+  epoch  2 (warm-up): train loss 0.6949, val AP 0.8068, ROC-AUC 0.9141, degraded-val AP 0.6646
+  epoch  3 (fine-tune): train loss 0.6706, val AP 0.8148, ROC-AUC 0.9113, degraded-val AP 0.7025
+  epoch  4 (fine-tune): train loss 0.5651, val AP 0.8174, ROC-AUC 0.9165, degraded-val AP 0.6670
+  epoch  5 (fine-tune): train loss 0.4890, val AP 0.8480, ROC-AUC 0.9287, degraded-val AP 0.6940
+  epoch  6 (fine-tune): train loss 0.4895, val AP 0.8086, ROC-AUC 0.9002, degraded-val AP 0.6670
+  epoch  7 (fine-tune): train loss 0.4061, val AP 0.8280, ROC-AUC 0.9109, degraded-val AP 0.7009
+  epoch  8 (fine-tune): train loss 0.2970, val AP 0.8326, ROC-AUC 0.9173, degraded-val AP 0.6679
+  epoch  9 (fine-tune): train loss 0.2347, val AP 0.8148, ROC-AUC 0.8979, degraded-val AP 0.6788
+  epoch 10 (fine-tune): train loss 0.2704, val AP 0.8312, ROC-AUC 0.9318, degraded-val AP 0.6862
+  epoch 11 (fine-tune): train loss 0.1884, val AP 0.8333, ROC-AUC 0.9053, degraded-val AP 0.6739
+  best: epoch 5, val AP 0.8480 (145s)
+B_shuf pvt_v2_b1 fold 3: 1215 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.8788, val AP 0.7493, ROC-AUC 0.8817, degraded-val AP 0.6682
+  epoch  2 (warm-up): train loss 0.6687, val AP 0.7961, ROC-AUC 0.9117, degraded-val AP 0.6789
+  epoch  3 (fine-tune): train loss 0.6161, val AP 0.8074, ROC-AUC 0.9043, degraded-val AP 0.7113
+  epoch  4 (fine-tune): train loss 0.5642, val AP 0.8305, ROC-AUC 0.9171, degraded-val AP 0.6867
+  epoch  5 (fine-tune): train loss 0.5869, val AP 0.8378, ROC-AUC 0.9224, degraded-val AP 0.7299
+  epoch  6 (fine-tune): train loss 0.4604, val AP 0.8392, ROC-AUC 0.9209, degraded-val AP 0.7045
+  epoch  7 (fine-tune): train loss 0.4232, val AP 0.8414, ROC-AUC 0.9308, degraded-val AP 0.6988
+  epoch  8 (fine-tune): train loss 0.3380, val AP 0.8446, ROC-AUC 0.9184, degraded-val AP 0.6992
+  epoch  9 (fine-tune): train loss 0.2596, val AP 0.8402, ROC-AUC 0.9132, degraded-val AP 0.6750
+  epoch 10 (fine-tune): train loss 0.2611, val AP 0.8287, ROC-AUC 0.9066, degraded-val AP 0.6843
+  epoch 11 (fine-tune): train loss 0.2033, val AP 0.8549, ROC-AUC 0.9238, degraded-val AP 0.6861
+  epoch 12 (fine-tune): train loss 0.1036, val AP 0.8564, ROC-AUC 0.9280, degraded-val AP 0.6627
+  epoch 13 (fine-tune): train loss 0.0952, val AP 0.8466, ROC-AUC 0.9205, degraded-val AP 0.6859
+  epoch 14 (fine-tune): train loss 0.0687, val AP 0.8569, ROC-AUC 0.9327, degraded-val AP 0.6655
+  epoch 15 (fine-tune): train loss 0.0209, val AP 0.8534, ROC-AUC 0.9298, degraded-val AP 0.6657
+  epoch 16 (fine-tune): train loss 0.0362, val AP 0.8494, ROC-AUC 0.9308, degraded-val AP 0.6309
+  epoch 17 (fine-tune): train loss 0.0553, val AP 0.8270, ROC-AUC 0.9119, degraded-val AP 0.6718
+  best: epoch 14, val AP 0.8569 (178s)
+--- done in 643s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\extract_features.py --variant B --backbones pvt_v2_b1 --device auto --workers 4
+B: 10991 photo x condition rows
+B pvt_v2_b1 fold 0: scored 9771 rows in 52s
+B pvt_v2_b1 fold 1: scored 9771 rows in 51s
+B pvt_v2_b1 fold 2: scored 9780 rows in 51s
+B pvt_v2_b1 fold 3: scored 9776 rows in 51s
+B pvt_v2_b1: saved pvt_v2_b1.npz
+--- done in 215s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\fit_fusion.py --stage A --backbones pvt_v2_b1
+clinical lr: fitted
+clinical rf: fitted
+clinical xgb: fitted
+--- done in 4s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\fit_fusion.py --stage B --backbones pvt_v2_b1
+two_stage B pvt_v2_b1: 27 fusion models fitted
+late average B pvt_v2_b1: saved
+--- done in 11s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\predict_endtoend.py --model-set B_image --backbones pvt_v2_b1 --device auto --workers 4
+end-to-end B_image pvt_v2_b1: 9369 predictions saved
+--- done in 8s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\predict_endtoend.py --model-set B_clin --backbones pvt_v2_b1 --device auto --workers 4
+end-to-end B_clin pvt_v2_b1: scored 9369 photos x 4 folds
+end-to-end B_clin pvt_v2_b1: permutation importance scored
+end-to-end B_clin pvt_v2_b1: 176904 predictions saved
+--- done in 357s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\predict_endtoend.py --model-set B_shuf --backbones pvt_v2_b1 --device auto --workers 4
+end-to-end B_shuf pvt_v2_b1: scored 9369 photos x 4 folds
+end-to-end B_shuf pvt_v2_b1: 9369 predictions saved
+--- done in 209s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\extract_features.py --variant Bj --backbones pvt_v2_b1 --device auto --workers 4
+Bj: 10991 photo x condition rows
+Bj pvt_v2_b1 fold 0: scored 9771 rows in 52s
+Bj pvt_v2_b1 fold 1: scored 9771 rows in 51s
+Bj pvt_v2_b1 fold 2: scored 9780 rows in 51s
+Bj pvt_v2_b1 fold 3: scored 9776 rows in 51s
+Bj pvt_v2_b1: saved pvt_v2_b1.npz
+--- done in 214s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\fit_fusion.py --stage Bj --backbones pvt_v2_b1
+hybrid Bj pvt_v2_b1: 2 fusion models fitted
+--- done in 2s
+
+step 0: validation-only evaluation with the dose gate (no test performance is computed)
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\evaluate_all.py --val-only --dose-gate --backbones pvt_v2_b1
+672354 prediction rows, 138 models; evaluation sets: ['val']
+completeness check passed
+
+Key results (mean of the backbones; * = pre-specified primary comparison with a 98.33% Bonferroni interval, others exploratory with 95% intervals):
+
+  --- Step 0 - checks on validation photos (not results)
+    VAL_image_ap_clean                     +0.8678 [+0.7865, +0.9281]  level          Image-only AP, clean validation photos | validation (clean)
+    VAL_image_ap_mildest                   +0.8287 [+0.7348, +0.8983]  level          Image-only AP, mildest levels (blur sigma 1, downsampling x2) | validation
+    VAL_image_ap_strongest                 +0.5752 [+0.4454, +0.6938]  level          Image-only AP, strongest levels (blur sigma 5, downsampling x6) | validation
+    VAL_dose_drop                          +0.2926 [+0.1799, +0.4064]  CI above 0     Dose check (development check, mean of backbones and of blur sigma 5 / downsampling x6): image-only AP, clean minus strongest levels (rule of thumb: at least 0.05) | validation
+    VAL_clinical_ap                        +0.4717 [+0.3487, +0.6116]  level          Clinical-only AP (LR), validation photos | validation (clean)
+    VAL_gain_clean_two_stage               +0.0090 [-0.0237, +0.0433]  CI includes 0  Rehearsal on validation: gain from clinical features (two-stage) | validation (clean)
+    VAL_gain_seen_two_stage                +0.0164 [-0.0524, +0.0879]  CI includes 0  Rehearsal on validation: gain from clinical features (two-stage) | validation, 8 blur/downsampling
+    VAL_P1_two_stage                       +0.0074 [-0.0423, +0.0577]  CI includes 0  Rehearsal on validation: P1 (two-stage) | validation, 8 blur/downsampling vs clean
+    VAL_NC_gain_seen_two_stage             -0.0214 [-0.0344, -0.0095]  CI below 0     Rehearsal on validation: shuffled-clinical gain (two-stage); expected about 0 | validation, 8 blur/downsampling
+    VAL_gain_clean_end_to_end              +0.0004 [-0.0148, +0.0158]  CI includes 0  Rehearsal on validation: gain from clinical features (end-to-end) | validation (clean)
+    VAL_gain_seen_end_to_end               +0.0186 [+0.0100, +0.0283]  CI above 0     Rehearsal on validation: gain from clinical features (end-to-end) | validation, 8 blur/downsampling
+    VAL_P1_end_to_end                      +0.0181 [+0.0022, +0.0347]  CI above 0     Rehearsal on validation: P1 (end-to-end) | validation, 8 blur/downsampling vs clean
+    VAL_NC_gain_seen_end_to_end            -0.0022 [-0.0065, +0.0021]  CI includes 0  Rehearsal on validation: shuffled-clinical gain (end-to-end); expected about 0 | validation, 8 blur/downsampling
+
+  --- Layer 2 - does clinical information compensate? (standard training, fixed fusion weights)
+    NC_gain_val_two_stage                  -0.0033 [-0.0098, +0.0033]  CI includes 0  Shuffled clinical: AP(image + shuffled) - AP(image) (two-stage); expected about 0 | validation (clean) | 10 permutations: -0.0102 to +0.0146
+    NC_real_minus_shuffled_val_two_stage   +0.0123 [-0.0204, +0.0462]  CI includes 0  AP(image + real clinical) - AP(image + shuffled clinical) (two-stage) | validation (clean)
+    NC_gain_val_end_to_end                 +0.0001 [-0.0130, +0.0129]  CI includes 0  Shuffled clinical: AP(image + shuffled) - AP(image) (end-to-end); expected about 0 | validation (clean)
+    NC_real_minus_shuffled_val_end_to_end  +0.0003 [-0.0129, +0.0143]  CI includes 0  AP(image + real clinical) - AP(image + shuffled clinical) (end-to-end) | validation (clean)
+
+Saved 324 model x set x condition rows and 17 summaries to C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\results_pvt\summary
+
+Dose check passed: averaged over the backbones and the two strongest levels, blur / downsampling lower the image-only validation AP by 0.293 (AP of a constant score = 0.229). This is a development check, not evidence for the hypotheses; report the rule and its result in the methods or appendix.
+--- done in 27s
+
+=================== stage C ===================
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\train.py --model-set C1_image --backbones pvt_v2_b1 --device auto --workers 4
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C1_image pvt_v2_b1 fold 0: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.7876, val AP 0.7868, ROC-AUC 0.9062, degraded-val AP 0.7113
+  epoch  2 (warm-up): train loss 0.6716, val AP 0.8229, ROC-AUC 0.9146, degraded-val AP 0.6896
+  epoch  3 (fine-tune): train loss 0.6828, val AP 0.8121, ROC-AUC 0.9156, degraded-val AP 0.7110
+  epoch  4 (fine-tune): train loss 0.7012, val AP 0.8024, ROC-AUC 0.9148, degraded-val AP 0.7181
+  epoch  5 (fine-tune): train loss 0.5333, val AP 0.8300, ROC-AUC 0.9189, degraded-val AP 0.6890
+  epoch  6 (fine-tune): train loss 0.5152, val AP 0.8484, ROC-AUC 0.9276, degraded-val AP 0.6649
+  epoch  7 (fine-tune): train loss 0.5179, val AP 0.8438, ROC-AUC 0.9261, degraded-val AP 0.7141
+  epoch  8 (fine-tune): train loss 0.4396, val AP 0.8315, ROC-AUC 0.9037, degraded-val AP 0.6491
+  epoch  9 (fine-tune): train loss 0.4494, val AP 0.8182, ROC-AUC 0.9087, degraded-val AP 0.6793
+  epoch 10 (fine-tune): train loss 0.3988, val AP 0.8348, ROC-AUC 0.9192, degraded-val AP 0.6676
+  epoch 11 (fine-tune): train loss 0.2919, val AP 0.8155, ROC-AUC 0.8995, degraded-val AP 0.6776
+  epoch 12 (fine-tune): train loss 0.2403, val AP 0.8052, ROC-AUC 0.9095, degraded-val AP 0.6918
+  best: epoch 6, val AP 0.8484 (157s)
+C1_image pvt_v2_b1 fold 1: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.8332, val AP 0.7167, ROC-AUC 0.8613, degraded-val AP 0.6718
+  epoch  2 (warm-up): train loss 0.6390, val AP 0.7758, ROC-AUC 0.8868, degraded-val AP 0.6912
+  epoch  3 (fine-tune): train loss 0.7043, val AP 0.7684, ROC-AUC 0.8708, degraded-val AP 0.6983
+  epoch  4 (fine-tune): train loss 0.6550, val AP 0.7866, ROC-AUC 0.8774, degraded-val AP 0.7222
+  epoch  5 (fine-tune): train loss 0.5574, val AP 0.8180, ROC-AUC 0.9064, degraded-val AP 0.7077
+  epoch  6 (fine-tune): train loss 0.5985, val AP 0.8211, ROC-AUC 0.9161, degraded-val AP 0.7282
+  epoch  7 (fine-tune): train loss 0.5283, val AP 0.8161, ROC-AUC 0.9198, degraded-val AP 0.7115
+  epoch  8 (fine-tune): train loss 0.4210, val AP 0.8269, ROC-AUC 0.9220, degraded-val AP 0.6755
+  epoch  9 (fine-tune): train loss 0.3967, val AP 0.8159, ROC-AUC 0.9107, degraded-val AP 0.6756
+  epoch 10 (fine-tune): train loss 0.4108, val AP 0.8034, ROC-AUC 0.9121, degraded-val AP 0.6892
+  epoch 11 (fine-tune): train loss 0.3494, val AP 0.8126, ROC-AUC 0.9180, degraded-val AP 0.7084
+  epoch 12 (fine-tune): train loss 0.3973, val AP 0.8172, ROC-AUC 0.9244, degraded-val AP 0.7043
+  epoch 13 (fine-tune): train loss 0.2807, val AP 0.8184, ROC-AUC 0.9019, degraded-val AP 0.6464
+  epoch 14 (fine-tune): train loss 0.2969, val AP 0.7798, ROC-AUC 0.8881, degraded-val AP 0.6682
+  best: epoch 8, val AP 0.8269 (169s)
+C1_image pvt_v2_b1 fold 2: 1211 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.9588, val AP 0.6902, ROC-AUC 0.8368, degraded-val AP 0.6340
+  epoch  2 (warm-up): train loss 0.6970, val AP 0.7823, ROC-AUC 0.9012, degraded-val AP 0.7066
+  epoch  3 (fine-tune): train loss 0.6769, val AP 0.7884, ROC-AUC 0.8903, degraded-val AP 0.7159
+  epoch  4 (fine-tune): train loss 0.6233, val AP 0.8286, ROC-AUC 0.9207, degraded-val AP 0.6996
+  epoch  5 (fine-tune): train loss 0.6040, val AP 0.8219, ROC-AUC 0.9156, degraded-val AP 0.7256
+  epoch  6 (fine-tune): train loss 0.5379, val AP 0.8158, ROC-AUC 0.9087, degraded-val AP 0.7369
+  epoch  7 (fine-tune): train loss 0.5019, val AP 0.8076, ROC-AUC 0.9055, degraded-val AP 0.7424
+  epoch  8 (fine-tune): train loss 0.4500, val AP 0.8169, ROC-AUC 0.9116, degraded-val AP 0.7187
+  epoch  9 (fine-tune): train loss 0.3673, val AP 0.7888, ROC-AUC 0.9019, degraded-val AP 0.7165
+  epoch 10 (fine-tune): train loss 0.3954, val AP 0.8008, ROC-AUC 0.9145, degraded-val AP 0.6894
+  best: epoch 4, val AP 0.8286 (145s)
+C1_image pvt_v2_b1 fold 3: 1215 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.8621, val AP 0.7295, ROC-AUC 0.8655, degraded-val AP 0.6580
+  epoch  2 (warm-up): train loss 0.6812, val AP 0.7576, ROC-AUC 0.8845, degraded-val AP 0.6920
+  epoch  3 (fine-tune): train loss 0.6268, val AP 0.7650, ROC-AUC 0.8570, degraded-val AP 0.6927
+  epoch  4 (fine-tune): train loss 0.5720, val AP 0.8271, ROC-AUC 0.9139, degraded-val AP 0.7274
+  epoch  5 (fine-tune): train loss 0.6197, val AP 0.8212, ROC-AUC 0.9172, degraded-val AP 0.7384
+  epoch  6 (fine-tune): train loss 0.4862, val AP 0.8366, ROC-AUC 0.9193, degraded-val AP 0.7365
+  epoch  7 (fine-tune): train loss 0.4707, val AP 0.8408, ROC-AUC 0.9285, degraded-val AP 0.7336
+  epoch  8 (fine-tune): train loss 0.4156, val AP 0.8363, ROC-AUC 0.9145, degraded-val AP 0.7268
+  epoch  9 (fine-tune): train loss 0.3546, val AP 0.8406, ROC-AUC 0.9168, degraded-val AP 0.6911
+  epoch 10 (fine-tune): train loss 0.3345, val AP 0.8365, ROC-AUC 0.9213, degraded-val AP 0.7092
+  epoch 11 (fine-tune): train loss 0.2968, val AP 0.8413, ROC-AUC 0.9181, degraded-val AP 0.7289
+  epoch 12 (fine-tune): train loss 0.2675, val AP 0.8528, ROC-AUC 0.9271, degraded-val AP 0.6957
+  epoch 13 (fine-tune): train loss 0.1845, val AP 0.8063, ROC-AUC 0.8991, degraded-val AP 0.6916
+  epoch 14 (fine-tune): train loss 0.1904, val AP 0.7940, ROC-AUC 0.9143, degraded-val AP 0.7047
+  epoch 15 (fine-tune): train loss 0.1628, val AP 0.8223, ROC-AUC 0.9109, degraded-val AP 0.6716
+  epoch 16 (fine-tune): train loss 0.1028, val AP 0.8245, ROC-AUC 0.9153, degraded-val AP 0.6906
+  epoch 17 (fine-tune): train loss 0.1238, val AP 0.7884, ROC-AUC 0.9030, degraded-val AP 0.7076
+  epoch 18 (fine-tune): train loss 0.1233, val AP 0.8229, ROC-AUC 0.9158, degraded-val AP 0.7085
+  best: epoch 12, val AP 0.8528 (195s)
+--- done in 688s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\train.py --model-set C1_clin --backbones pvt_v2_b1 --device auto --workers 4
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C1_clin pvt_v2_b1 fold 0: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.7869, val AP 0.7893, ROC-AUC 0.9093, degraded-val AP 0.7194
+  epoch  2 (warm-up): train loss 0.6670, val AP 0.8292, ROC-AUC 0.9199, degraded-val AP 0.6968
+  epoch  3 (fine-tune): train loss 0.6722, val AP 0.8224, ROC-AUC 0.9222, degraded-val AP 0.7232
+  epoch  4 (fine-tune): train loss 0.6894, val AP 0.8105, ROC-AUC 0.9201, degraded-val AP 0.7349
+  epoch  5 (fine-tune): train loss 0.5228, val AP 0.8381, ROC-AUC 0.9239, degraded-val AP 0.7041
+  epoch  6 (fine-tune): train loss 0.4977, val AP 0.8556, ROC-AUC 0.9323, degraded-val AP 0.6717
+  epoch  7 (fine-tune): train loss 0.5034, val AP 0.8519, ROC-AUC 0.9307, degraded-val AP 0.7280
+  epoch  8 (fine-tune): train loss 0.4293, val AP 0.8404, ROC-AUC 0.9126, degraded-val AP 0.6733
+  epoch  9 (fine-tune): train loss 0.4398, val AP 0.8302, ROC-AUC 0.9155, degraded-val AP 0.6957
+  epoch 10 (fine-tune): train loss 0.3976, val AP 0.8377, ROC-AUC 0.9208, degraded-val AP 0.6821
+  epoch 11 (fine-tune): train loss 0.2915, val AP 0.8233, ROC-AUC 0.9041, degraded-val AP 0.6955
+  epoch 12 (fine-tune): train loss 0.2385, val AP 0.8134, ROC-AUC 0.9144, degraded-val AP 0.7185
+  best: epoch 6, val AP 0.8556 (158s)
+C1_clin pvt_v2_b1 fold 1: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.8336, val AP 0.7195, ROC-AUC 0.8634, degraded-val AP 0.6760
+  epoch  2 (warm-up): train loss 0.6336, val AP 0.7798, ROC-AUC 0.8895, degraded-val AP 0.7022
+  epoch  3 (fine-tune): train loss 0.6990, val AP 0.7771, ROC-AUC 0.8769, degraded-val AP 0.7107
+  epoch  4 (fine-tune): train loss 0.6440, val AP 0.7932, ROC-AUC 0.8842, degraded-val AP 0.7362
+  epoch  5 (fine-tune): train loss 0.5477, val AP 0.8277, ROC-AUC 0.9135, degraded-val AP 0.7232
+  epoch  6 (fine-tune): train loss 0.5796, val AP 0.8269, ROC-AUC 0.9191, degraded-val AP 0.7527
+  epoch  7 (fine-tune): train loss 0.5058, val AP 0.8274, ROC-AUC 0.9230, degraded-val AP 0.7338
+  epoch  8 (fine-tune): train loss 0.4004, val AP 0.8367, ROC-AUC 0.9254, degraded-val AP 0.7043
+  epoch  9 (fine-tune): train loss 0.3829, val AP 0.8301, ROC-AUC 0.9150, degraded-val AP 0.6987
+  epoch 10 (fine-tune): train loss 0.3946, val AP 0.8257, ROC-AUC 0.9189, degraded-val AP 0.7131
+  epoch 11 (fine-tune): train loss 0.3318, val AP 0.8284, ROC-AUC 0.9212, degraded-val AP 0.7383
+  epoch 12 (fine-tune): train loss 0.3889, val AP 0.8417, ROC-AUC 0.9297, degraded-val AP 0.7300
+  epoch 13 (fine-tune): train loss 0.2761, val AP 0.8285, ROC-AUC 0.9086, degraded-val AP 0.6804
+  epoch 14 (fine-tune): train loss 0.2862, val AP 0.7989, ROC-AUC 0.8943, degraded-val AP 0.6825
+  best: epoch 12, val AP 0.8417 (168s)
+C1_clin pvt_v2_b1 fold 2: 1211 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.9563, val AP 0.7000, ROC-AUC 0.8429, degraded-val AP 0.6443
+  epoch  2 (warm-up): train loss 0.6912, val AP 0.7885, ROC-AUC 0.9057, degraded-val AP 0.7119
+  epoch  3 (fine-tune): train loss 0.6690, val AP 0.7948, ROC-AUC 0.8963, degraded-val AP 0.7277
+  epoch  4 (fine-tune): train loss 0.6106, val AP 0.8354, ROC-AUC 0.9265, degraded-val AP 0.7118
+  epoch  5 (fine-tune): train loss 0.5974, val AP 0.8280, ROC-AUC 0.9209, degraded-val AP 0.7390
+  epoch  6 (fine-tune): train loss 0.5203, val AP 0.8257, ROC-AUC 0.9153, degraded-val AP 0.7484
+  epoch  7 (fine-tune): train loss 0.5010, val AP 0.8197, ROC-AUC 0.9119, degraded-val AP 0.7608
+  epoch  8 (fine-tune): train loss 0.4408, val AP 0.8301, ROC-AUC 0.9192, degraded-val AP 0.7330
+  epoch  9 (fine-tune): train loss 0.3648, val AP 0.8007, ROC-AUC 0.9068, degraded-val AP 0.7263
+  epoch 10 (fine-tune): train loss 0.3849, val AP 0.8141, ROC-AUC 0.9175, degraded-val AP 0.6928
+  best: epoch 4, val AP 0.8354 (144s)
+C1_clin pvt_v2_b1 fold 3: 1215 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.8597, val AP 0.7369, ROC-AUC 0.8712, degraded-val AP 0.6651
+  epoch  2 (warm-up): train loss 0.6762, val AP 0.7638, ROC-AUC 0.8895, degraded-val AP 0.7011
+  epoch  3 (fine-tune): train loss 0.6211, val AP 0.7693, ROC-AUC 0.8627, degraded-val AP 0.7035
+  epoch  4 (fine-tune): train loss 0.5599, val AP 0.8339, ROC-AUC 0.9181, degraded-val AP 0.7422
+  epoch  5 (fine-tune): train loss 0.6117, val AP 0.8320, ROC-AUC 0.9239, degraded-val AP 0.7549
+  epoch  6 (fine-tune): train loss 0.4763, val AP 0.8477, ROC-AUC 0.9256, degraded-val AP 0.7493
+  epoch  7 (fine-tune): train loss 0.4593, val AP 0.8523, ROC-AUC 0.9332, degraded-val AP 0.7514
+  epoch  8 (fine-tune): train loss 0.4064, val AP 0.8453, ROC-AUC 0.9188, degraded-val AP 0.7489
+  epoch  9 (fine-tune): train loss 0.3506, val AP 0.8485, ROC-AUC 0.9195, degraded-val AP 0.7123
+  epoch 10 (fine-tune): train loss 0.3267, val AP 0.8457, ROC-AUC 0.9250, degraded-val AP 0.7253
+  epoch 11 (fine-tune): train loss 0.2932, val AP 0.8495, ROC-AUC 0.9221, degraded-val AP 0.7487
+  epoch 12 (fine-tune): train loss 0.2658, val AP 0.8590, ROC-AUC 0.9299, degraded-val AP 0.7258
+  epoch 13 (fine-tune): train loss 0.1847, val AP 0.8165, ROC-AUC 0.9021, degraded-val AP 0.7067
+  epoch 14 (fine-tune): train loss 0.1853, val AP 0.8028, ROC-AUC 0.9183, degraded-val AP 0.7196
+  epoch 15 (fine-tune): train loss 0.1596, val AP 0.8268, ROC-AUC 0.9131, degraded-val AP 0.6907
+  epoch 16 (fine-tune): train loss 0.1104, val AP 0.8272, ROC-AUC 0.9171, degraded-val AP 0.7067
+  epoch 17 (fine-tune): train loss 0.1286, val AP 0.7968, ROC-AUC 0.9070, degraded-val AP 0.7181
+  epoch 18 (fine-tune): train loss 0.1150, val AP 0.8261, ROC-AUC 0.9173, degraded-val AP 0.7242
+  best: epoch 12, val AP 0.8590 (194s)
+--- done in 687s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\train.py --model-set C2_image --backbones pvt_v2_b1 --device auto --workers 4
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C2_image pvt_v2_b1 fold 0: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.8565, val AP 0.7511, ROC-AUC 0.8901, degraded-val AP 0.6957
+  epoch  2 (warm-up): train loss 0.7654, val AP 0.7801, ROC-AUC 0.8966, degraded-val AP 0.7099
+  epoch  3 (fine-tune): train loss 0.7524, val AP 0.8165, ROC-AUC 0.9180, degraded-val AP 0.7097
+  epoch  4 (fine-tune): train loss 0.7630, val AP 0.7945, ROC-AUC 0.9149, degraded-val AP 0.6987
+  epoch  5 (fine-tune): train loss 0.6348, val AP 0.8336, ROC-AUC 0.9269, degraded-val AP 0.7763
+  epoch  6 (fine-tune): train loss 0.6121, val AP 0.8329, ROC-AUC 0.9237, degraded-val AP 0.7526
+  epoch  7 (fine-tune): train loss 0.5853, val AP 0.8401, ROC-AUC 0.9266, degraded-val AP 0.7755
+  epoch  8 (fine-tune): train loss 0.5785, val AP 0.8244, ROC-AUC 0.9063, degraded-val AP 0.7555
+  epoch  9 (fine-tune): train loss 0.4987, val AP 0.8262, ROC-AUC 0.9048, degraded-val AP 0.7681
+  epoch 10 (fine-tune): train loss 0.5821, val AP 0.8328, ROC-AUC 0.9203, degraded-val AP 0.7537
+  epoch 11 (fine-tune): train loss 0.4588, val AP 0.8311, ROC-AUC 0.9074, degraded-val AP 0.7642
+  epoch 12 (fine-tune): train loss 0.4363, val AP 0.8426, ROC-AUC 0.9118, degraded-val AP 0.7592
+  epoch 13 (fine-tune): train loss 0.4987, val AP 0.8443, ROC-AUC 0.9182, degraded-val AP 0.7680
+  best: epoch 13, val AP 0.8443 (170s)
+C2_image pvt_v2_b1 fold 1: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.9079, val AP 0.6592, ROC-AUC 0.8113, degraded-val AP 0.6412
+  epoch  2 (warm-up): train loss 0.7325, val AP 0.7306, ROC-AUC 0.8662, degraded-val AP 0.6800
+  epoch  3 (fine-tune): train loss 0.7301, val AP 0.7652, ROC-AUC 0.8817, degraded-val AP 0.6830
+  epoch  4 (fine-tune): train loss 0.7353, val AP 0.7695, ROC-AUC 0.8713, degraded-val AP 0.7231
+  epoch  5 (fine-tune): train loss 0.6065, val AP 0.8098, ROC-AUC 0.9114, degraded-val AP 0.7514
+  epoch  6 (fine-tune): train loss 0.7159, val AP 0.8109, ROC-AUC 0.9188, degraded-val AP 0.7523
+  epoch  7 (fine-tune): train loss 0.6447, val AP 0.8239, ROC-AUC 0.9278, degraded-val AP 0.7581
+  epoch  8 (fine-tune): train loss 0.5286, val AP 0.8295, ROC-AUC 0.9287, degraded-val AP 0.7801
+  epoch  9 (fine-tune): train loss 0.5463, val AP 0.8311, ROC-AUC 0.9280, degraded-val AP 0.7569
+  epoch 10 (fine-tune): train loss 0.5443, val AP 0.7983, ROC-AUC 0.9050, degraded-val AP 0.7666
+  epoch 11 (fine-tune): train loss 0.5031, val AP 0.8169, ROC-AUC 0.9165, degraded-val AP 0.7647
+  epoch 12 (fine-tune): train loss 0.4900, val AP 0.8215, ROC-AUC 0.9265, degraded-val AP 0.7844
+  epoch 13 (fine-tune): train loss 0.4583, val AP 0.8108, ROC-AUC 0.9134, degraded-val AP 0.7801
+  epoch 14 (fine-tune): train loss 0.4210, val AP 0.7962, ROC-AUC 0.9009, degraded-val AP 0.7460
+  best: epoch 9, val AP 0.8311 (175s)
+C2_image pvt_v2_b1 fold 2: 1211 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.9881, val AP 0.7058, ROC-AUC 0.8369, degraded-val AP 0.6650
+  epoch  2 (warm-up): train loss 0.7772, val AP 0.7711, ROC-AUC 0.8960, degraded-val AP 0.7026
+  epoch  3 (fine-tune): train loss 0.7265, val AP 0.7786, ROC-AUC 0.8878, degraded-val AP 0.7150
+  epoch  4 (fine-tune): train loss 0.7246, val AP 0.8135, ROC-AUC 0.9135, degraded-val AP 0.7282
+  epoch  5 (fine-tune): train loss 0.6781, val AP 0.7906, ROC-AUC 0.8851, degraded-val AP 0.7436
+  epoch  6 (fine-tune): train loss 0.6137, val AP 0.8150, ROC-AUC 0.9099, degraded-val AP 0.7820
+  epoch  7 (fine-tune): train loss 0.5712, val AP 0.8237, ROC-AUC 0.9170, degraded-val AP 0.7251
+  epoch  8 (fine-tune): train loss 0.5724, val AP 0.8315, ROC-AUC 0.9246, degraded-val AP 0.7743
+  epoch  9 (fine-tune): train loss 0.5284, val AP 0.8283, ROC-AUC 0.9132, degraded-val AP 0.7601
+  epoch 10 (fine-tune): train loss 0.5516, val AP 0.8224, ROC-AUC 0.9222, degraded-val AP 0.7630
+  epoch 11 (fine-tune): train loss 0.5047, val AP 0.8165, ROC-AUC 0.9114, degraded-val AP 0.7789
+  epoch 12 (fine-tune): train loss 0.4772, val AP 0.8238, ROC-AUC 0.9249, degraded-val AP 0.7787
+  epoch 13 (fine-tune): train loss 0.4946, val AP 0.8094, ROC-AUC 0.9039, degraded-val AP 0.7170
+  epoch 14 (fine-tune): train loss 0.4154, val AP 0.8133, ROC-AUC 0.9128, degraded-val AP 0.7871
+  best: epoch 8, val AP 0.8315 (174s)
+C2_image pvt_v2_b1 fold 3: 1215 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.9214, val AP 0.6711, ROC-AUC 0.8371, degraded-val AP 0.5866
+  epoch  2 (warm-up): train loss 0.7636, val AP 0.7205, ROC-AUC 0.8575, degraded-val AP 0.6424
+  epoch  3 (fine-tune): train loss 0.7114, val AP 0.7670, ROC-AUC 0.8630, degraded-val AP 0.6785
+  epoch  4 (fine-tune): train loss 0.6897, val AP 0.8197, ROC-AUC 0.9161, degraded-val AP 0.6818
+  epoch  5 (fine-tune): train loss 0.6873, val AP 0.8096, ROC-AUC 0.9073, degraded-val AP 0.7096
+  epoch  6 (fine-tune): train loss 0.5965, val AP 0.8358, ROC-AUC 0.9257, degraded-val AP 0.7568
+  epoch  7 (fine-tune): train loss 0.5822, val AP 0.8352, ROC-AUC 0.9248, degraded-val AP 0.7484
+  epoch  8 (fine-tune): train loss 0.5390, val AP 0.8261, ROC-AUC 0.9167, degraded-val AP 0.7487
+  epoch  9 (fine-tune): train loss 0.4719, val AP 0.8374, ROC-AUC 0.9179, degraded-val AP 0.7391
+  epoch 10 (fine-tune): train loss 0.4845, val AP 0.8477, ROC-AUC 0.9289, degraded-val AP 0.7811
+  epoch 11 (fine-tune): train loss 0.4657, val AP 0.8508, ROC-AUC 0.9211, degraded-val AP 0.7454
+  epoch 12 (fine-tune): train loss 0.4227, val AP 0.8540, ROC-AUC 0.9256, degraded-val AP 0.7649
+  epoch 13 (fine-tune): train loss 0.4133, val AP 0.8580, ROC-AUC 0.9264, degraded-val AP 0.7971
+  epoch 14 (fine-tune): train loss 0.4072, val AP 0.8544, ROC-AUC 0.9332, degraded-val AP 0.7840
+  epoch 15 (fine-tune): train loss 0.3893, val AP 0.8625, ROC-AUC 0.9261, degraded-val AP 0.7739
+  epoch 16 (fine-tune): train loss 0.3335, val AP 0.8543, ROC-AUC 0.9209, degraded-val AP 0.7710
+  epoch 17 (fine-tune): train loss 0.3242, val AP 0.8536, ROC-AUC 0.9248, degraded-val AP 0.7637
+  epoch 18 (fine-tune): train loss 0.2911, val AP 0.8422, ROC-AUC 0.9116, degraded-val AP 0.7663
+  epoch 19 (fine-tune): train loss 0.2571, val AP 0.8334, ROC-AUC 0.9134, degraded-val AP 0.7638
+  epoch 20 (fine-tune): train loss 0.2095, val AP 0.8453, ROC-AUC 0.9161, degraded-val AP 0.7691
+  epoch 21 (fine-tune): train loss 0.2808, val AP 0.8393, ROC-AUC 0.9181, degraded-val AP 0.7722
+  best: epoch 15, val AP 0.8625 (221s)
+--- done in 763s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\train.py --model-set C2_clin --backbones pvt_v2_b1 --device auto --workers 4
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+C2_clin pvt_v2_b1 fold 0: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.8547, val AP 0.7587, ROC-AUC 0.8962, degraded-val AP 0.7046
+  epoch  2 (warm-up): train loss 0.7593, val AP 0.7873, ROC-AUC 0.9039, degraded-val AP 0.7214
+  epoch  3 (fine-tune): train loss 0.7427, val AP 0.8249, ROC-AUC 0.9242, degraded-val AP 0.7222
+  epoch  4 (fine-tune): train loss 0.7414, val AP 0.8013, ROC-AUC 0.9209, degraded-val AP 0.7140
+  epoch  5 (fine-tune): train loss 0.6176, val AP 0.8411, ROC-AUC 0.9327, degraded-val AP 0.7897
+  epoch  6 (fine-tune): train loss 0.5941, val AP 0.8435, ROC-AUC 0.9317, degraded-val AP 0.7683
+  epoch  7 (fine-tune): train loss 0.5614, val AP 0.8498, ROC-AUC 0.9308, degraded-val AP 0.7931
+  epoch  8 (fine-tune): train loss 0.5634, val AP 0.8357, ROC-AUC 0.9154, degraded-val AP 0.7701
+  epoch  9 (fine-tune): train loss 0.4839, val AP 0.8373, ROC-AUC 0.9144, degraded-val AP 0.7788
+  epoch 10 (fine-tune): train loss 0.5604, val AP 0.8424, ROC-AUC 0.9257, degraded-val AP 0.7643
+  epoch 11 (fine-tune): train loss 0.4388, val AP 0.8402, ROC-AUC 0.9154, degraded-val AP 0.7854
+  epoch 12 (fine-tune): train loss 0.4149, val AP 0.8508, ROC-AUC 0.9184, degraded-val AP 0.7768
+  epoch 13 (fine-tune): train loss 0.4773, val AP 0.8501, ROC-AUC 0.9230, degraded-val AP 0.7792
+  best: epoch 12, val AP 0.8508 (170s)
+C2_clin pvt_v2_b1 fold 1: 1220 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.9066, val AP 0.6625, ROC-AUC 0.8152, degraded-val AP 0.6486
+  epoch  2 (warm-up): train loss 0.7240, val AP 0.7373, ROC-AUC 0.8724, degraded-val AP 0.6912
+  epoch  3 (fine-tune): train loss 0.7225, val AP 0.7735, ROC-AUC 0.8899, degraded-val AP 0.6962
+  epoch  4 (fine-tune): train loss 0.7241, val AP 0.7829, ROC-AUC 0.8813, degraded-val AP 0.7359
+  epoch  5 (fine-tune): train loss 0.5955, val AP 0.8220, ROC-AUC 0.9192, degraded-val AP 0.7620
+  epoch  6 (fine-tune): train loss 0.7172, val AP 0.8166, ROC-AUC 0.9189, degraded-val AP 0.7732
+  epoch  7 (fine-tune): train loss 0.5926, val AP 0.8360, ROC-AUC 0.9362, degraded-val AP 0.7791
+  epoch  8 (fine-tune): train loss 0.5126, val AP 0.8419, ROC-AUC 0.9335, degraded-val AP 0.7963
+  epoch  9 (fine-tune): train loss 0.5210, val AP 0.8467, ROC-AUC 0.9318, degraded-val AP 0.7739
+  epoch 10 (fine-tune): train loss 0.5236, val AP 0.8250, ROC-AUC 0.9136, degraded-val AP 0.7924
+  epoch 11 (fine-tune): train loss 0.4783, val AP 0.8364, ROC-AUC 0.9251, degraded-val AP 0.7876
+  epoch 12 (fine-tune): train loss 0.4629, val AP 0.8460, ROC-AUC 0.9325, degraded-val AP 0.8034
+  epoch 13 (fine-tune): train loss 0.4325, val AP 0.8385, ROC-AUC 0.9195, degraded-val AP 0.8024
+  epoch 14 (fine-tune): train loss 0.3977, val AP 0.8214, ROC-AUC 0.9079, degraded-val AP 0.7680
+  best: epoch 9, val AP 0.8467 (176s)
+C2_clin pvt_v2_b1 fold 2: 1211 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.9824, val AP 0.7129, ROC-AUC 0.8431, degraded-val AP 0.6730
+  epoch  2 (warm-up): train loss 0.7703, val AP 0.7786, ROC-AUC 0.9015, degraded-val AP 0.7112
+  epoch  3 (fine-tune): train loss 0.7165, val AP 0.7847, ROC-AUC 0.8935, degraded-val AP 0.7254
+  epoch  4 (fine-tune): train loss 0.7119, val AP 0.8242, ROC-AUC 0.9214, degraded-val AP 0.7486
+  epoch  5 (fine-tune): train loss 0.6648, val AP 0.7982, ROC-AUC 0.8919, degraded-val AP 0.7640
+  epoch  6 (fine-tune): train loss 0.6023, val AP 0.8229, ROC-AUC 0.9170, degraded-val AP 0.8004
+  epoch  7 (fine-tune): train loss 0.5530, val AP 0.8330, ROC-AUC 0.9225, degraded-val AP 0.7458
+  epoch  8 (fine-tune): train loss 0.5529, val AP 0.8423, ROC-AUC 0.9318, degraded-val AP 0.7923
+  epoch  9 (fine-tune): train loss 0.5131, val AP 0.8417, ROC-AUC 0.9203, degraded-val AP 0.7767
+  epoch 10 (fine-tune): train loss 0.5305, val AP 0.8340, ROC-AUC 0.9241, degraded-val AP 0.7759
+  epoch 11 (fine-tune): train loss 0.4827, val AP 0.8297, ROC-AUC 0.9145, degraded-val AP 0.7948
+  epoch 12 (fine-tune): train loss 0.4492, val AP 0.8372, ROC-AUC 0.9267, degraded-val AP 0.7929
+  epoch 13 (fine-tune): train loss 0.4692, val AP 0.8198, ROC-AUC 0.9078, degraded-val AP 0.7316
+  epoch 14 (fine-tune): train loss 0.3949, val AP 0.8284, ROC-AUC 0.9171, degraded-val AP 0.8005
+  best: epoch 8, val AP 0.8423 (175s)
+C2_clin pvt_v2_b1 fold 3: 1215 training / 380 validation photos, unfrozen 3,173,888/13,496,000 = 23.5% of encoder
+  epoch  1 (warm-up): train loss 0.9276, val AP 0.6770, ROC-AUC 0.8426, degraded-val AP 0.5962
+  epoch  2 (warm-up): train loss 0.7565, val AP 0.7279, ROC-AUC 0.8632, degraded-val AP 0.6526
+  epoch  3 (fine-tune): train loss 0.7039, val AP 0.7704, ROC-AUC 0.8663, degraded-val AP 0.6860
+  epoch  4 (fine-tune): train loss 0.6754, val AP 0.8278, ROC-AUC 0.9205, degraded-val AP 0.7025
+  epoch  5 (fine-tune): train loss 0.6750, val AP 0.8199, ROC-AUC 0.9159, degraded-val AP 0.7320
+  epoch  6 (fine-tune): train loss 0.5793, val AP 0.8460, ROC-AUC 0.9304, degraded-val AP 0.7753
+  epoch  7 (fine-tune): train loss 0.5645, val AP 0.8431, ROC-AUC 0.9282, degraded-val AP 0.7588
+  epoch  8 (fine-tune): train loss 0.5228, val AP 0.8352, ROC-AUC 0.9213, degraded-val AP 0.7617
+  epoch  9 (fine-tune): train loss 0.4598, val AP 0.8446, ROC-AUC 0.9213, degraded-val AP 0.7543
+  epoch 10 (fine-tune): train loss 0.4626, val AP 0.8596, ROC-AUC 0.9330, degraded-val AP 0.7985
+  epoch 11 (fine-tune): train loss 0.4478, val AP 0.8615, ROC-AUC 0.9269, degraded-val AP 0.7618
+  epoch 12 (fine-tune): train loss 0.4112, val AP 0.8599, ROC-AUC 0.9291, degraded-val AP 0.7764
+  epoch 13 (fine-tune): train loss 0.4124, val AP 0.8681, ROC-AUC 0.9315, degraded-val AP 0.8127
+  epoch 14 (fine-tune): train loss 0.4007, val AP 0.8582, ROC-AUC 0.9345, degraded-val AP 0.8057
+  epoch 15 (fine-tune): train loss 0.3607, val AP 0.8673, ROC-AUC 0.9269, degraded-val AP 0.7884
+  epoch 16 (fine-tune): train loss 0.3237, val AP 0.8584, ROC-AUC 0.9242, degraded-val AP 0.7900
+  epoch 17 (fine-tune): train loss 0.3126, val AP 0.8603, ROC-AUC 0.9291, degraded-val AP 0.7857
+  epoch 18 (fine-tune): train loss 0.2769, val AP 0.8429, ROC-AUC 0.9099, degraded-val AP 0.7807
+  epoch 19 (fine-tune): train loss 0.2488, val AP 0.8367, ROC-AUC 0.9162, degraded-val AP 0.7798
+  best: epoch 13, val AP 0.8681 (209s)
+--- done in 753s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\extract_features.py --variant C1 --backbones pvt_v2_b1 --device auto --workers 4
+C1: 10991 photo x condition rows
+C1 pvt_v2_b1 fold 0: scored 9771 rows in 53s
+C1 pvt_v2_b1 fold 1: scored 9771 rows in 52s
+C1 pvt_v2_b1 fold 2: scored 9780 rows in 52s
+C1 pvt_v2_b1 fold 3: scored 9776 rows in 52s
+C1 pvt_v2_b1: saved pvt_v2_b1.npz
+--- done in 217s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\fit_fusion.py --stage C1 --backbones pvt_v2_b1
+two_stage C1 pvt_v2_b1: 12 fusion models fitted
+--- done in 4s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\extract_features.py --variant C2 --backbones pvt_v2_b1 --device auto --workers 4
+C2: 14235 photo x condition rows
+C2 pvt_v2_b1 fold 0: scored 10575 rows in 54s
+C2 pvt_v2_b1 fold 1: scored 10575 rows in 54s
+C2 pvt_v2_b1 fold 2: scored 10602 rows in 54s
+C2 pvt_v2_b1 fold 3: scored 10590 rows in 55s
+C2 pvt_v2_b1: saved pvt_v2_b1.npz
+--- done in 226s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\fit_fusion.py --stage C2 --backbones pvt_v2_b1
+two_stage C2 pvt_v2_b1: 12 fusion models fitted
+--- done in 4s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\predict_endtoend.py --model-set C1_image --backbones pvt_v2_b1 --device auto --workers 4
+end-to-end C1_image pvt_v2_b1: 9369 predictions saved
+--- done in 8s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\predict_endtoend.py --model-set C1_clin --backbones pvt_v2_b1 --device auto --workers 4
+end-to-end C1_clin pvt_v2_b1: scored 9369 photos x 4 folds
+end-to-end C1_clin pvt_v2_b1: 9369 predictions saved
+--- done in 210s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\predict_endtoend.py --model-set C2_image --backbones pvt_v2_b1 --device auto --workers 4
+end-to-end C2_image pvt_v2_b1: 9369 predictions saved
+--- done in 8s
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\predict_endtoend.py --model-set C2_clin --backbones pvt_v2_b1 --device auto --workers 4
+end-to-end C2_clin pvt_v2_b1: scored 9369 photos x 4 folds
+end-to-end C2_clin pvt_v2_b1: 9369 predictions saved
+--- done in 210s
+
+=================== stage D ===================
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\fit_fusion.py --stage D --backbones pvt_v2_b1
+two_stage D pvt_v2_b1: 5 fusion models fitted
+--- done in 3s
+
+=================== stage evaluate ===================
+final evaluation: test + inadequate performance
+
+$ C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\src\evaluate_all.py --backbones pvt_v2_b1
+978867 prediction rows, 171 models; evaluation sets: ['test', 'inadequate', 'val']
+completeness check passed
+
+Key results (mean of the backbones; * = pre-specified primary comparison with a 98.33% Bonferroni interval, others exploratory with 95% intervals):
+
+  --- Step 0 - checks on validation photos (not results)
+    VAL_image_ap_clean                     +0.8678 [+0.7865, +0.9281]  level          Image-only AP, clean validation photos | validation (clean)
+    VAL_image_ap_mildest                   +0.8287 [+0.7348, +0.8983]  level          Image-only AP, mildest levels (blur sigma 1, downsampling x2) | validation
+    VAL_image_ap_strongest                 +0.5752 [+0.4454, +0.6938]  level          Image-only AP, strongest levels (blur sigma 5, downsampling x6) | validation
+    VAL_dose_drop                          +0.2926 [+0.1799, +0.4064]  CI above 0     Dose check (development check, mean of backbones and of blur sigma 5 / downsampling x6): image-only AP, clean minus strongest levels (rule of thumb: at least 0.05) | validation
+    VAL_clinical_ap                        +0.4717 [+0.3487, +0.6116]  level          Clinical-only AP (LR), validation photos | validation (clean)
+    VAL_gain_clean_two_stage               +0.0090 [-0.0237, +0.0433]  CI includes 0  Rehearsal on validation: gain from clinical features (two-stage) | validation (clean)
+    VAL_gain_seen_two_stage                +0.0164 [-0.0524, +0.0879]  CI includes 0  Rehearsal on validation: gain from clinical features (two-stage) | validation, 8 blur/downsampling
+    VAL_P1_two_stage                       +0.0074 [-0.0423, +0.0577]  CI includes 0  Rehearsal on validation: P1 (two-stage) | validation, 8 blur/downsampling vs clean
+    VAL_NC_gain_seen_two_stage             -0.0214 [-0.0344, -0.0095]  CI below 0     Rehearsal on validation: shuffled-clinical gain (two-stage); expected about 0 | validation, 8 blur/downsampling
+    VAL_gain_clean_end_to_end              +0.0004 [-0.0148, +0.0158]  CI includes 0  Rehearsal on validation: gain from clinical features (end-to-end) | validation (clean)
+    VAL_gain_seen_end_to_end               +0.0186 [+0.0100, +0.0283]  CI above 0     Rehearsal on validation: gain from clinical features (end-to-end) | validation, 8 blur/downsampling
+    VAL_P1_end_to_end                      +0.0181 [+0.0022, +0.0347]  CI above 0     Rehearsal on validation: P1 (end-to-end) | validation, 8 blur/downsampling vs clean
+    VAL_NC_gain_seen_end_to_end            -0.0022 [-0.0065, +0.0021]  CI includes 0  Rehearsal on validation: shuffled-clinical gain (end-to-end); expected about 0 | validation, 8 blur/downsampling
+
+  --- Layer 1 - each modality alone
+    L1_clinical_ap                         +0.6532 [+0.5244, +0.7771]  level          Clinical-only AP (LR) | test
+    L1_image_ap_clean                      +0.8690 [+0.7999, +0.9197]  level          Image-only AP | clean
+    L1_image_ap_seen                       +0.7462 [+0.6525, +0.8252]  level          Image-only AP | 8 blur/downsampling
+    L1_image_ap_strongest                  +0.6696 [+0.5571, +0.7689]  level          Image-only AP | strongest blur/downsampling
+    L1_image_loss_seen                     +0.1228 [+0.0687, +0.1849]  CI above 0     What degradation costs the image model: AP clean minus AP under blur/downsampling | 8 blur/downsampling vs clean
+    L1_image_minus_clinical_clean          +0.2158 [+0.0883, +0.3436]  CI above 0     AP image only minus AP clinical only | clean
+    L1_image_minus_clinical_strongest      +0.0165 [-0.1213, +0.1475]  CI includes 0  AP image only minus AP clinical only | strongest blur/downsampling
+
+  --- Layer 2 - does clinical information compensate? (standard training, fixed fusion weights)
+  * P1_two_stage                           +0.0139 [-0.0363, +0.0660]  CI includes 0  P1 (two-stage): gain under blur/downsampling minus gain on clean photos | 8 blur/downsampling vs clean
+  * P1_end_to_end                          +0.0104 [-0.0105, +0.0320]  CI includes 0  P1 (end-to-end): gain under blur/downsampling minus gain on clean photos | 8 blur/downsampling vs clean
+    B_trend_two_stage                      +0.0316 [-0.0288, +0.0916]  CI includes 0  Trend (two-stage): change in gain from clean to the strongest blur/downsampling (slope vs severity) | clean + 8 blur/downsampling
+    B_gain_clean_two_stage                 +0.0304 [+0.0016, +0.0621]  CI above 0     Gain from clinical features (two-stage) | clean
+    B_gain_seen_two_stage                  +0.0443 [-0.0128, +0.1035]  CI includes 0  Gain from clinical features (two-stage) | 8 blur/downsampling
+    B_gain_unseen_two_stage                +0.0961 [+0.0378, +0.1589]  CI above 0     Gain from clinical features (two-stage) | 5 JPEG/noise
+    B_gain_contrast_two_stage              +0.0455 [-0.0012, +0.0952]  CI includes 0  Gain from clinical features (two-stage) | 2 low contrast
+    B_gain_inadequate_two_stage            +0.0520 [-0.0237, +0.1509]  CI includes 0  Gain from clinical features (two-stage) | inadequate set
+    B_gain_sharp_low_two_stage             +0.0270 [-0.0157, +0.0789]  CI includes 0  Gain from clinical features (two-stage) | clean test, least sharp third
+    B_gain_sharp_high_two_stage            +0.0289 [-0.0135, +0.0851]  CI includes 0  Gain from clinical features (two-stage) | clean test, sharpest third
+    B_headroom_two_stage                   +0.1833 [-0.0631, +0.3825]  CI includes 0  Headroom-normalised gain, sum(gain) / sum(1 - AP image) (two-stage) | 8 blur/downsampling
+    B_delta_unseen_two_stage               +0.0657 [+0.0220, +0.1125]  CI above 0     Gain under these conditions minus gain on clean (two-stage) | 5 JPEG/noise vs clean
+    B_delta_contrast_two_stage             +0.0151 [-0.0170, +0.0479]  CI includes 0  Gain under these conditions minus gain on clean (two-stage) | 2 low contrast vs clean
+    B_trend_end_to_end                     +0.0112 [-0.0044, +0.0277]  CI includes 0  Trend (end-to-end): change in gain from clean to the strongest blur/downsampling (slope vs severity) | clean + 8 blur/downsampling
+    B_gain_clean_end_to_end                +0.0098 [-0.0021, +0.0225]  CI includes 0  Gain from clinical features (end-to-end) | clean
+    B_gain_seen_end_to_end                 +0.0202 [+0.0097, +0.0322]  CI above 0     Gain from clinical features (end-to-end) | 8 blur/downsampling
+    B_gain_unseen_end_to_end               +0.0098 [+0.0008, +0.0193]  CI above 0     Gain from clinical features (end-to-end) | 5 JPEG/noise
+    B_gain_contrast_end_to_end             +0.0077 [-0.0037, +0.0207]  CI includes 0  Gain from clinical features (end-to-end) | 2 low contrast
+    B_gain_inadequate_end_to_end           -0.0167 [-0.0564, +0.0001]  CI includes 0  Gain from clinical features (end-to-end) | inadequate set
+    B_gain_sharp_low_end_to_end            +0.0022 [-0.0120, +0.0152]  CI includes 0  Gain from clinical features (end-to-end) | clean test, least sharp third
+    B_gain_sharp_high_end_to_end           -0.0030 [-0.0382, +0.0248]  CI includes 0  Gain from clinical features (end-to-end) | clean test, sharpest third
+    B_headroom_end_to_end                  +0.0796 [+0.0405, +0.1236]  CI above 0     Headroom-normalised gain, sum(gain) / sum(1 - AP image) (end-to-end) | 8 blur/downsampling
+    B_delta_unseen_end_to_end              -0.0000 [-0.0139, +0.0139]  CI includes 0  Gain under these conditions minus gain on clean (end-to-end) | 5 JPEG/noise vs clean
+    B_delta_contrast_end_to_end            -0.0021 [-0.0178, +0.0139]  CI includes 0  Gain under these conditions minus gain on clean (end-to-end) | 2 low contrast vs clean
+    B_gain_sharp_low_minus_high_two_stage  -0.0019 [-0.0713, +0.0635]  CI includes 0  Natural quality: gain in the least sharp third minus gain in the sharpest third (two-stage) | clean test photos by measured sharpness
+    B_gain_sharp_low_minus_high_end_to_end +0.0052 [-0.0265, +0.0418]  CI includes 0  Natural quality: gain in the least sharp third minus gain in the sharpest third (end-to-end) | clean test photos by measured sharpness
+    B_fusion_vs_clinical_clean_two_stage   +0.2467 [+0.1351, +0.3589]  CI above 0     AP(image + clinical) - AP(clinical only) (two-stage): additional performance over the clinical model | clean
+    B_fusion_vs_clinical_seen_two_stage    +0.1495 [+0.0616, +0.2342]  CI above 0     AP(image + clinical) - AP(clinical only) (two-stage): additional performance over the clinical model | 8 blur/downsampling
+    B_fusion_vs_clinical_unseen_two_stage  +0.1123 [+0.0229, +0.1983]  CI above 0     AP(image + clinical) - AP(clinical only) (two-stage): additional performance over the clinical model | 5 JPEG/noise
+    B_fusion_vs_clinical_contrast_two_stage +0.1793 [+0.0789, +0.2746]  CI above 0     AP(image + clinical) - AP(clinical only) (two-stage): additional performance over the clinical model | 2 low contrast
+    B_fusion_vs_clinical_inadequate_two_stage +0.2484 [+0.0319, +0.5230]  CI above 0     AP(image + clinical) - AP(clinical only) (two-stage): additional performance over the clinical model | inadequate set
+    B_image_vs_clinical_seen_two_stage     +0.1053 [-0.0227, +0.2327]  CI includes 0  AP(image only) - AP(clinical only) (two-stage) | 8 blur/downsampling
+    B_fusion_vs_clinical_clean_end_to_end  +0.2257 [+0.0994, +0.3526]  CI above 0     AP(image + clinical) - AP(clinical only) (end-to-end): additional performance over the clinical model | clean
+    B_fusion_vs_clinical_seen_end_to_end   +0.1132 [-0.0123, +0.2360]  CI includes 0  AP(image + clinical) - AP(clinical only) (end-to-end): additional performance over the clinical model | 8 blur/downsampling
+    B_fusion_vs_clinical_unseen_end_to_end +0.0224 [-0.1067, +0.1473]  CI includes 0  AP(image + clinical) - AP(clinical only) (end-to-end): additional performance over the clinical model | 5 JPEG/noise
+    B_fusion_vs_clinical_contrast_end_to_end +0.1394 [+0.0114, +0.2658]  CI above 0     AP(image + clinical) - AP(clinical only) (end-to-end): additional performance over the clinical model | 2 low contrast
+    B_fusion_vs_clinical_inadequate_end_to_end +0.1813 [-0.1042, +0.5038]  CI includes 0  AP(image + clinical) - AP(clinical only) (end-to-end): additional performance over the clinical model | inadequate set
+    B_image_vs_clinical_seen_end_to_end    +0.0930 [-0.0374, +0.2201]  CI includes 0  AP(image only) - AP(clinical only) (end-to-end) | 8 blur/downsampling
+    NC_gain_val_two_stage                  -0.0033 [-0.0098, +0.0033]  CI includes 0  Shuffled clinical: AP(image + shuffled) - AP(image) (two-stage); expected about 0 | validation (clean) | 10 permutations: -0.0102 to +0.0146
+    NC_real_minus_shuffled_val_two_stage   +0.0123 [-0.0204, +0.0462]  CI includes 0  AP(image + real clinical) - AP(image + shuffled clinical) (two-stage) | validation (clean)
+    NC_gain_clean_two_stage                -0.0028 [-0.0080, +0.0019]  CI includes 0  Shuffled clinical: AP(image + shuffled) - AP(image) (two-stage); expected about 0 | clean | 10 permutations: -0.0135 to +0.0059
+    NC_real_minus_shuffled_clean_two_stage +0.0331 [+0.0043, +0.0651]  CI above 0     AP(image + real clinical) - AP(image + shuffled clinical) (two-stage) | clean
+    NC_gain_seen_two_stage                 -0.0136 [-0.0261, -0.0021]  CI below 0     Shuffled clinical: AP(image + shuffled) - AP(image) (two-stage); expected about 0 | 8 blur/downsampling | 10 permutations: -0.0347 to +0.0024
+    NC_real_minus_shuffled_seen_two_stage  +0.0579 [+0.0004, +0.1175]  CI above 0     AP(image + real clinical) - AP(image + shuffled clinical) (two-stage) | 8 blur/downsampling
+    NC_gain_val_end_to_end                 +0.0001 [-0.0130, +0.0129]  CI includes 0  Shuffled clinical: AP(image + shuffled) - AP(image) (end-to-end); expected about 0 | validation (clean)
+    NC_real_minus_shuffled_val_end_to_end  +0.0003 [-0.0129, +0.0143]  CI includes 0  AP(image + real clinical) - AP(image + shuffled clinical) (end-to-end) | validation (clean)
+    NC_gain_clean_end_to_end               +0.0008 [-0.0107, +0.0114]  CI includes 0  Shuffled clinical: AP(image + shuffled) - AP(image) (end-to-end); expected about 0 | clean
+    NC_real_minus_shuffled_clean_end_to_end +0.0090 [-0.0027, +0.0226]  CI includes 0  AP(image + real clinical) - AP(image + shuffled clinical) (end-to-end) | clean
+    NC_gain_seen_end_to_end                +0.0025 [-0.0022, +0.0074]  CI includes 0  Shuffled clinical: AP(image + shuffled) - AP(image) (end-to-end); expected about 0 | 8 blur/downsampling
+    NC_real_minus_shuffled_seen_end_to_end +0.0177 [+0.0056, +0.0310]  CI above 0     AP(image + real clinical) - AP(image + shuffled clinical) (end-to-end) | 8 blur/downsampling
+    A_late_average_clean                   -0.0062 [-0.0175, +0.0036]  CI includes 0  AP late average minus AP two-stage LR (image + clinical) | clean
+    A_late_average_seen                    -0.0212 [-0.0522, +0.0097]  CI includes 0  AP late average minus AP two-stage LR (image + clinical) | 8 blur/downsampling
+
+  --- Layer 3 - how to fuse, and which features
+  * P2                                     +0.0363 [-0.0261, +0.1016]  CI includes 0  P2: AP two-stage minus AP end-to-end (image + clinical) | 8 blur/downsampling
+    P2_part1_clean                         -0.0058 [-0.0146, +0.0021]  CI includes 0  P2 decomposition, part 1: AP two-stage minus AP hybrid (same LR fitting; image network trained alone vs jointly, plus its head and checkpoint) | clean
+    P2_part2_clean                         +0.0269 [+0.0036, +0.0538]  CI above 0     P2 decomposition, part 2: AP hybrid minus AP end-to-end (same image network; out-of-fold LR refit vs joint head, regularisation, preprocessing) | clean
+    P2_part1_seen                          -0.0113 [-0.0224, -0.0010]  CI below 0     P2 decomposition, part 1: AP two-stage minus AP hybrid (same LR fitting; image network trained alone vs jointly, plus its head and checkpoint) | 8 blur/downsampling
+    P2_part2_seen                          +0.0477 [+0.0028, +0.0942]  CI above 0     P2 decomposition, part 2: AP hybrid minus AP end-to-end (same image network; out-of-fold LR refit vs joint head, regularisation, preprocessing) | 8 blur/downsampling
+    B_P1_hybrid                            +0.0241 [-0.0094, +0.0586]  CI includes 0  P1 (hybrid): gain under blur/downsampling minus gain on clean photos | 8 blur/downsampling vs clean
+    B_missing_only_clean                   -0.0005 [-0.0109, +0.0098]  CI includes 0  Missing indicators only: AP(image + missing indicators) - AP(image) (two-stage) | clean
+    B_values_beyond_missing_clean          +0.0309 [+0.0041, +0.0610]  CI above 0     Clinical values beyond missingness: AP(image + all) - AP(image + missing indicators) (two-stage) | clean
+    B_missing_only_seen                    -0.0209 [-0.0467, +0.0029]  CI includes 0  Missing indicators only: AP(image + missing indicators) - AP(image) (two-stage) | 8 blur/downsampling
+    B_values_beyond_missing_seen           +0.0652 [+0.0143, +0.1185]  CI above 0     Clinical values beyond missingness: AP(image + all) - AP(image + missing indicators) (two-stage) | 8 blur/downsampling
+    P2_clean                               +0.0211 [-0.0054, +0.0508]  CI includes 0  AP two-stage minus AP end-to-end (image + clinical) | clean
+    P2_unseen                              +0.0900 [+0.0351, +0.1486]  CI above 0     AP two-stage minus AP end-to-end (image + clinical) | 5 JPEG/noise
+    P2_contrast                            +0.0399 [-0.0040, +0.0852]  CI includes 0  AP two-stage minus AP end-to-end (image + clinical) | 2 low contrast
+    P2_inadequate                          +0.0671 [-0.0095, +0.1834]  CI includes 0  AP two-stage minus AP end-to-end (image + clinical) | inadequate set
+    SENS_P1_two_stage_lr_c0.1              +0.0163 [-0.0232, +0.0570]  CI includes 0  P1 (two-stage) with LR C = 0.1 instead of 1 | 8 blur/downsampling vs clean
+    SENS_P2_lr_c0.1                        +0.0405 [-0.0095, +0.0923]  CI includes 0  P2 with LR C = 0.1 instead of 1 | 8 blur/downsampling
+    SENS_P1_two_stage_lr_c10               +0.0124 [-0.0293, +0.0544]  CI includes 0  P1 (two-stage) with LR C = 10 instead of 1 | 8 blur/downsampling vs clean
+    SENS_P2_lr_c10                         +0.0351 [-0.0168, +0.0880]  CI includes 0  P2 with LR C = 10 instead of 1 | 8 blur/downsampling
+
+  --- Layer 4 - after robust training: is clinical information still needed?
+    C1_P1_two_stage                        +0.0080 [-0.0190, +0.0344]  CI includes 0  C1: gain under blur/downsampling minus gain on clean (two-stage) | 8 blur/downsampling vs clean
+    C1_P1_change_two_stage                 -0.0059 [-0.0326, +0.0179]  CI includes 0  C1: change of that difference relative to standard training B (two-stage) | 8 blur/downsampling vs clean
+    C1_gain_clean_two_stage                +0.0456 [+0.0158, +0.0811]  CI above 0     C1: gain from clinical features (two-stage) | clean
+    C1_gain_seen_two_stage                 +0.0536 [+0.0091, +0.1016]  CI above 0     C1: gain from clinical features (two-stage) | 8 blur/downsampling
+    C1_P1_end_to_end                       +0.0165 [+0.0044, +0.0299]  CI above 0     C1: gain under blur/downsampling minus gain on clean (end-to-end) | 8 blur/downsampling vs clean
+    C1_P1_change_end_to_end                +0.0061 [-0.0138, +0.0252]  CI includes 0  C1: change of that difference relative to standard training B (end-to-end) | 8 blur/downsampling vs clean
+    C1_gain_clean_end_to_end               +0.0067 [-0.0006, +0.0155]  CI includes 0  C1: gain from clinical features (end-to-end) | clean
+    C1_gain_seen_end_to_end                +0.0232 [+0.0093, +0.0388]  CI above 0     C1: gain from clinical features (end-to-end) | 8 blur/downsampling
+    C1_P2                                  +0.0313 [-0.0080, +0.0722]  CI includes 0  C1: AP two-stage minus AP end-to-end (image + clinical) | 8 blur/downsampling
+    C1_image_vs_B_clean                    -0.0145 [-0.0387, +0.0059]  CI includes 0  C1: image-only AP minus standard (B) image-only AP | clean
+    C1_image_vs_B_seen                     +0.0237 [+0.0024, +0.0466]  CI above 0     C1: image-only AP minus standard (B) image-only AP | 8 blur/downsampling
+    C1_image_vs_B_unseen                   +0.0178 [-0.0056, +0.0428]  CI includes 0  C1: image-only AP minus standard (B) image-only AP | 5 JPEG/noise
+    C1_image_vs_B_contrast                 +0.0041 [-0.0178, +0.0262]  CI includes 0  C1: image-only AP minus standard (B) image-only AP | 2 low contrast
+    C1_image_vs_B_inadequate               -0.0639 [-0.1552, +0.0030]  CI includes 0  C1: image-only AP minus standard (B) image-only AP | inadequate set
+    C2_P1_two_stage                        -0.0010 [-0.0202, +0.0177]  CI includes 0  C2: gain under blur/downsampling minus gain on clean (two-stage) | 8 blur/downsampling vs clean
+    C2_P1_change_two_stage                 -0.0150 [-0.0514, +0.0179]  CI includes 0  C2: change of that difference relative to standard training B (two-stage) | 8 blur/downsampling vs clean
+    C2_gain_clean_two_stage                +0.0541 [+0.0238, +0.0908]  CI above 0     C2: gain from clinical features (two-stage) | clean
+    C2_gain_seen_two_stage                 +0.0531 [+0.0154, +0.0941]  CI above 0     C2: gain from clinical features (two-stage) | 8 blur/downsampling
+    C2_P1_end_to_end                       +0.0050 [-0.0055, +0.0155]  CI includes 0  C2: gain under blur/downsampling minus gain on clean (end-to-end) | 8 blur/downsampling vs clean
+    C2_P1_change_end_to_end                -0.0054 [-0.0249, +0.0130]  CI includes 0  C2: change of that difference relative to standard training B (end-to-end) | 8 blur/downsampling vs clean
+    C2_gain_clean_end_to_end               +0.0188 [+0.0074, +0.0332]  CI above 0     C2: gain from clinical features (end-to-end) | clean
+    C2_gain_seen_end_to_end                +0.0238 [+0.0117, +0.0373]  CI above 0     C2: gain from clinical features (end-to-end) | 8 blur/downsampling
+    C2_P2                                  +0.0291 [+0.0006, +0.0601]  CI above 0     C2: AP two-stage minus AP end-to-end (image + clinical) | 8 blur/downsampling
+    C2_image_vs_B_clean                    -0.0218 [-0.0504, +0.0018]  CI includes 0  C2: image-only AP minus standard (B) image-only AP | clean
+    C2_image_vs_B_seen                     +0.0543 [+0.0179, +0.0964]  CI above 0     C2: image-only AP minus standard (B) image-only AP | 8 blur/downsampling
+    C2_image_vs_B_unseen                   +0.0543 [+0.0146, +0.0962]  CI above 0     C2: image-only AP minus standard (B) image-only AP | 5 JPEG/noise
+    C2_image_vs_B_contrast                 +0.0348 [+0.0051, +0.0670]  CI above 0     C2: image-only AP minus standard (B) image-only AP | 2 low contrast
+    C2_image_vs_B_inadequate               -0.0938 [-0.2324, +0.0174]  CI includes 0  C2: image-only AP minus standard (B) image-only AP | inadequate set
+    C2_vs_C1_image_clean                   -0.0072 [-0.0250, +0.0095]  CI includes 0  Degradation augmentation beyond basic augmentation: image-only AP, C2 minus C1 | clean
+    C2_vs_C1_image_seen                    +0.0306 [+0.0036, +0.0595]  CI above 0     Degradation augmentation beyond basic augmentation: image-only AP, C2 minus C1 | 8 blur/downsampling
+    C2_vs_C1_image_unseen                  +0.0365 [+0.0106, +0.0634]  CI above 0     Degradation augmentation beyond basic augmentation: image-only AP, C2 minus C1 | 5 JPEG/noise
+    C2_vs_C1_image_contrast                +0.0307 [+0.0070, +0.0561]  CI above 0     Degradation augmentation beyond basic augmentation: image-only AP, C2 minus C1 | 2 low contrast
+    C2_vs_C1_image_inadequate              -0.0298 [-0.1031, +0.0448]  CI includes 0  Degradation augmentation beyond basic augmentation: image-only AP, C2 minus C1 | inadequate set
+
+  --- Layer 5 - quality-aware fusion: can the fusion shift weight actively?
+    D_qint_vs_plain_clean                  -0.0004 [-0.0077, +0.0075]  CI includes 0  Quality-interaction fusion (L, x, q, qL, qx) minus plain fusion (L, x) | clean
+    D_qint_vs_plain_seen                   -0.0004 [-0.0083, +0.0070]  CI includes 0  Quality-interaction fusion (L, x, q, qL, qx) minus plain fusion (L, x) | 8 blur/downsampling
+    D_qint_vs_plain_unseen                 -0.0089 [-0.0257, +0.0074]  CI includes 0  Quality-interaction fusion (L, x, q, qL, qx) minus plain fusion (L, x) | 5 JPEG/noise
+    D_qint_vs_plain_contrast               +0.0018 [-0.0054, +0.0092]  CI includes 0  Quality-interaction fusion (L, x, q, qL, qx) minus plain fusion (L, x) | 2 low contrast
+    D_qint_vs_plain_inadequate             -0.0345 [-0.0885, +0.0055]  CI includes 0  Quality-interaction fusion (L, x, q, qL, qx) minus plain fusion (L, x) | inadequate set
+    D_q_main_vs_plain_clean                -0.0036 [-0.0113, +0.0035]  CI includes 0  Quality main effect only (L, x, q) minus plain fusion (L, x) | clean
+    D_qint_vs_q_main_clean                 +0.0033 [-0.0020, +0.0097]  CI includes 0  Interactions beyond the main effect: (L, x, q, qL, qx) minus (L, x, q) | clean
+    D_qL_vs_q_main_clean                   -0.0003 [-0.0020, +0.0012]  CI includes 0  Quality x image interaction: (L, x, q, qL) minus (L, x, q) | clean
+    D_qx_beyond_qL_clean                   +0.0036 [-0.0017, +0.0101]  CI includes 0  Quality x clinical interactions: (L, x, q, qL, qx) minus (L, x, q, qL) | clean
+    D_image_q_vs_image_clean               -0.0121 [-0.0221, -0.0039]  CI below 0     Quality without clinical features: (L, q, qL) minus image only (L) | clean
+    D_qint_vs_image_q_clean                +0.0659 [+0.0332, +0.1062]  CI above 0     Clinical features given quality: (L, x, q, qL, qx) minus (L, q, qL) | clean
+    D_oracle_vs_plain_clean                +0.0021 [-0.0034, +0.0088]  CI includes 0  Reference with known synthetic severity (not guaranteed to be an upper bound): oracle interactions minus plain fusion | clean
+    D_q_main_vs_plain_seen                 +0.0000 [-0.0039, +0.0038]  CI includes 0  Quality main effect only (L, x, q) minus plain fusion (L, x) | 8 blur/downsampling
+    D_qint_vs_q_main_seen                  -0.0004 [-0.0078, +0.0067]  CI includes 0  Interactions beyond the main effect: (L, x, q, qL, qx) minus (L, x, q) | 8 blur/downsampling
+    D_qL_vs_q_main_seen                    -0.0001 [-0.0009, +0.0007]  CI includes 0  Quality x image interaction: (L, x, q, qL) minus (L, x, q) | 8 blur/downsampling
+    D_qx_beyond_qL_seen                    -0.0004 [-0.0073, +0.0065]  CI includes 0  Quality x clinical interactions: (L, x, q, qL, qx) minus (L, x, q, qL) | 8 blur/downsampling
+    D_image_q_vs_image_seen                -0.0011 [-0.0053, +0.0030]  CI includes 0  Quality without clinical features: (L, q, qL) minus image only (L) | 8 blur/downsampling
+    D_qint_vs_image_q_seen                 +0.0538 [+0.0197, +0.0906]  CI above 0     Clinical features given quality: (L, x, q, qL, qx) minus (L, q, qL) | 8 blur/downsampling
+    D_oracle_vs_plain_seen                 -0.0036 [-0.0123, +0.0044]  CI includes 0  Reference with known synthetic severity (not guaranteed to be an upper bound): oracle interactions minus plain fusion | 8 blur/downsampling
+
+Saved 3046 model x set x condition rows and 142 summaries to C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\results_pvt\summary
+
+Dose check passed: averaged over the backbones and the two strongest levels, blur / downsampling lower the image-only validation AP by 0.293 (AP of a constant score = 0.229). This is a development check, not evidence for the hypotheses; report the rule and its result in the methods or appendix.
+--- done in 202s
+
+All requested stages finished in 117.0 min.
+Results: C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\results_pvt\summary (key_results.csv, metrics.csv, figures/); log: C:\Users\10121\Desktop\DR_experiments_v4\DR_experiments_v2\results_pvt\logs\run_all.log

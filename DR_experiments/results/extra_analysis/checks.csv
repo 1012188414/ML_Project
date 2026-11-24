@@ -1,0 +1,17 @@
+experiment,backbone,clinical_term_max_range_across_conditions,max_abs_diff_vs_table_C_gain
+B,convnextv2_nano,0.00030259836162094267,
+B,densenet169,0.0001374187112888059,
+B,efficientnet_b3,8.617653779330325e-05,
+B,mobilenetv3_large_150d,7.865811576568404e-05,
+B,pvt_v2_b1,0.00011294833218866707,
+C1,convnextv2_nano,6.287701403784318e-05,
+C1,densenet169,0.00010934588744870855,
+C1,efficientnet_b3,1.1765102103655778e-05,
+C1,mobilenetv3_large_150d,4.545691094914872e-05,
+C1,pvt_v2_b1,1.8664427912540305e-05,
+C2,convnextv2_nano,0.00018746759370324995,
+C2,densenet169,0.00021588091697433143,
+C2,efficientnet_b3,8.992552912223672e-05,
+C2,mobilenetv3_large_150d,6.798992408596494e-05,
+C2,pvt_v2_b1,1.355565736016473e-05,
+all,5-backbone mean vs results_5bb,,9.484531533625329e-05

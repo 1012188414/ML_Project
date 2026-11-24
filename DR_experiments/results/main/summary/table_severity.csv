@@ -1,0 +1,11 @@
+pipeline,group,n_photos,n_patients,"flagged, image clean","flagged, fusion clean","flagged, image degraded","flagged, fusion degraded","net change by degradation, image (degraded - clean)","net change by degradation, image, 95% CI","net change from clinical, degraded (fusion - image)","net change from clinical, degraded, 95% CI","net change from clinical, clean (fusion - image)","net change from clinical, clean, 95% CI","degraded: newly flagged by fusion (image no, fusion yes)","degraded: no longer flagged by fusion (image yes, fusion no)"
+two-stage,no DR (flagged = false positive),260,143,0.09,0.0662,0.0426,0.0454,-0.0474,"[-0.074, -0.022]",0.0028,"[-0.003, +0.009]",-0.0238,"[-0.044, -0.004]",0.0114,0.0087
+two-stage,mild NPDR (ICDR 1),18,13,0.3889,0.5667,0.1639,0.2667,-0.225,"[-0.395, -0.042]",0.1028,"[+0.052, +0.163]",0.1778,"[+0.022, +0.354]",0.1028,0.0
+two-stage,moderate NPDR (ICDR 2),45,28,0.6667,0.6667,0.2411,0.2878,-0.4256,"[-0.532, -0.317]",0.0467,"[+0.006, +0.093]",0.0,"[-0.050, +0.051]",0.065,0.0183
+two-stage,severe NPDR / PDR (ICDR 3-4),42,26,0.9667,0.981,0.7732,0.8435,-0.1935,"[-0.274, -0.124]",0.0702,"[+0.019, +0.128]",0.0143,"[+0.000, +0.041]",0.0893,0.019
+two-stage,all DR (ICDR 1-4),105,60,0.739,0.7752,0.4407,0.5064,-0.2983,"[-0.370, -0.227]",0.0657,"[+0.033, +0.101]",0.0362,"[-0.004, +0.080]",0.0812,0.0155
+end-to-end,no DR (flagged = false positive),260,143,0.0823,0.0938,0.0453,0.0481,-0.037,"[-0.063, -0.013]",0.0028,"[+0.000, +0.006]",0.0115,"[+0.002, +0.022]",0.0104,0.0076
+end-to-end,mild NPDR (ICDR 1),18,13,0.3778,0.4333,0.1583,0.1917,-0.2194,"[-0.383, -0.050]",0.0333,"[+0.008, +0.059]",0.0556,"[+0.000, +0.110]",0.0431,0.0097
+end-to-end,moderate NPDR (ICDR 2),45,28,0.6533,0.68,0.2417,0.2594,-0.4117,"[-0.524, -0.295]",0.0178,"[+0.008, +0.028]",0.0267,"[-0.005, +0.063]",0.03,0.0122
+end-to-end,severe NPDR / PDR (ICDR 3-4),42,26,0.9571,0.9667,0.7512,0.7875,-0.206,"[-0.282, -0.137]",0.0363,"[+0.024, +0.048]",0.0095,"[+0.000, +0.025]",0.0488,0.0125
+end-to-end,all DR (ICDR 1-4),105,60,0.7276,0.7524,0.4312,0.459,-0.2964,"[-0.369, -0.224]",0.0279,"[+0.020, +0.036]",0.0248,"[+0.006, +0.044]",0.0398,0.0119

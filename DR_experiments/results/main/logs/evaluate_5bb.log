@@ -1,0 +1,162 @@
+4781907 prediction rows, 843 models; evaluation sets: ['test', 'inadequate', 'val']
+completeness check passed
+
+Key results (mean of the backbones; * = pre-specified primary comparison with a 98.33% Bonferroni interval, others exploratory with 95% intervals):
+
+  --- Step 0 - checks on validation photos (not results)
+    VAL_image_ap_clean                     +0.8573 [+0.7772, +0.9156]  level          Image-only AP, clean validation photos | validation (clean)
+    VAL_image_ap_mildest                   +0.8192 [+0.7283, +0.8874]  level          Image-only AP, mildest levels (blur sigma 1, downsampling x2) | validation
+    VAL_image_ap_strongest                 +0.5689 [+0.4510, +0.6695]  level          Image-only AP, strongest levels (blur sigma 5, downsampling x6) | validation
+    VAL_dose_drop                          +0.2884 [+0.2125, +0.3683]  CI above 0     Dose check (development check, mean of backbones and of blur sigma 5 / downsampling x6): image-only AP, clean minus strongest levels (rule of thumb: at least 0.05) | validation
+    VAL_clinical_ap                        +0.4717 [+0.3487, +0.6116]  level          Clinical-only AP (LR), validation photos | validation (clean)
+    VAL_gain_clean_two_stage               +0.0130 [-0.0166, +0.0451]  CI includes 0  Rehearsal on validation: gain from clinical features (two-stage) | validation (clean)
+    VAL_gain_seen_two_stage                +0.0387 [+0.0004, +0.0793]  CI above 0     Rehearsal on validation: gain from clinical features (two-stage) | validation, 8 blur/downsampling
+    VAL_P1_two_stage                       +0.0257 [+0.0036, +0.0482]  CI above 0     Rehearsal on validation: P1 (two-stage) | validation, 8 blur/downsampling vs clean
+    VAL_NC_gain_seen_two_stage             -0.0075 [-0.0138, -0.0013]  CI below 0     Rehearsal on validation: shuffled-clinical gain (two-stage); expected about 0 | validation, 8 blur/downsampling
+    VAL_gain_clean_end_to_end              +0.0018 [-0.0039, +0.0077]  CI includes 0  Rehearsal on validation: gain from clinical features (end-to-end) | validation (clean)
+    VAL_gain_seen_end_to_end               +0.0123 [+0.0069, +0.0172]  CI above 0     Rehearsal on validation: gain from clinical features (end-to-end) | validation, 8 blur/downsampling
+    VAL_P1_end_to_end                      +0.0105 [+0.0040, +0.0165]  CI above 0     Rehearsal on validation: P1 (end-to-end) | validation, 8 blur/downsampling vs clean
+    VAL_NC_gain_seen_end_to_end            -0.0029 [-0.0066, +0.0009]  CI includes 0  Rehearsal on validation: shuffled-clinical gain (end-to-end); expected about 0 | validation, 8 blur/downsampling
+
+  --- Layer 1 - each modality alone
+    L1_clinical_ap                         +0.6532 [+0.5244, +0.7771]  level          Clinical-only AP (LR) | test
+    L1_image_ap_clean                      +0.8588 [+0.7893, +0.9114]  level          Image-only AP | clean
+    L1_image_ap_seen                       +0.7519 [+0.6619, +0.8248]  level          Image-only AP | 8 blur/downsampling
+    L1_image_ap_strongest                  +0.6807 [+0.5792, +0.7661]  level          Image-only AP | strongest blur/downsampling
+    L1_image_loss_seen                     +0.1069 [+0.0632, +0.1563]  CI above 0     What degradation costs the image model: AP clean minus AP under blur/downsampling | 8 blur/downsampling vs clean
+    L1_image_minus_clinical_clean          +0.2057 [+0.0781, +0.3315]  CI above 0     AP image only minus AP clinical only | clean
+    L1_image_minus_clinical_strongest      +0.0275 [-0.1029, +0.1544]  CI includes 0  AP image only minus AP clinical only | strongest blur/downsampling
+
+  --- Layer 2 - does clinical information compensate? (standard training, fixed fusion weights)
+  * P1_two_stage                           +0.0120 [-0.0107, +0.0355]  CI includes 0  P1 (two-stage): gain under blur/downsampling minus gain on clean photos | 8 blur/downsampling vs clean
+  * P1_end_to_end                          +0.0031 [-0.0041, +0.0103]  CI includes 0  P1 (end-to-end): gain under blur/downsampling minus gain on clean photos | 8 blur/downsampling vs clean
+    B_trend_two_stage                      +0.0310 [+0.0035, +0.0590]  CI above 0     Trend (two-stage): change in gain from clean to the strongest blur/downsampling (slope vs severity) | clean + 8 blur/downsampling
+    B_gain_clean_two_stage                 +0.0390 [+0.0158, +0.0670]  CI above 0     Gain from clinical features (two-stage) | clean
+    B_gain_seen_two_stage                  +0.0510 [+0.0165, +0.0868]  CI above 0     Gain from clinical features (two-stage) | 8 blur/downsampling
+    B_gain_unseen_two_stage                +0.0744 [+0.0336, +0.1161]  CI above 0     Gain from clinical features (two-stage) | 5 JPEG/noise
+    B_gain_contrast_two_stage              +0.0575 [+0.0166, +0.1004]  CI above 0     Gain from clinical features (two-stage) | 2 low contrast
+    B_gain_inadequate_two_stage            +0.0666 [-0.0157, +0.1755]  CI includes 0  Gain from clinical features (two-stage) | inadequate set
+    B_gain_sharp_low_two_stage             +0.0250 [-0.0136, +0.0695]  CI includes 0  Gain from clinical features (two-stage) | clean test, least sharp third
+    B_gain_sharp_high_two_stage            +0.0331 [+0.0042, +0.0762]  CI above 0     Gain from clinical features (two-stage) | clean test, sharpest third
+    B_headroom_two_stage                   +0.2085 [+0.0714, +0.3302]  CI above 0     Headroom-normalised gain, sum(gain) / sum(1 - AP image) (two-stage) | 8 blur/downsampling
+    B_delta_unseen_two_stage               +0.0354 [+0.0099, +0.0606]  CI above 0     Gain under these conditions minus gain on clean (two-stage) | 5 JPEG/noise vs clean
+    B_delta_contrast_two_stage             +0.0185 [-0.0050, +0.0411]  CI includes 0  Gain under these conditions minus gain on clean (two-stage) | 2 low contrast vs clean
+    B_trend_end_to_end                     +0.0042 [-0.0029, +0.0104]  CI includes 0  Trend (end-to-end): change in gain from clean to the strongest blur/downsampling (slope vs severity) | clean + 8 blur/downsampling
+    B_gain_clean_end_to_end                +0.0085 [+0.0031, +0.0150]  CI above 0     Gain from clinical features (end-to-end) | clean
+    B_gain_seen_end_to_end                 +0.0117 [+0.0065, +0.0173]  CI above 0     Gain from clinical features (end-to-end) | 8 blur/downsampling
+    B_gain_unseen_end_to_end               +0.0154 [+0.0094, +0.0214]  CI above 0     Gain from clinical features (end-to-end) | 5 JPEG/noise
+    B_gain_contrast_end_to_end             +0.0155 [+0.0072, +0.0245]  CI above 0     Gain from clinical features (end-to-end) | 2 low contrast
+    B_gain_inadequate_end_to_end           +0.0059 [-0.0085, +0.0241]  CI includes 0  Gain from clinical features (end-to-end) | inadequate set
+    B_gain_sharp_low_end_to_end            +0.0062 [-0.0007, +0.0152]  CI includes 0  Gain from clinical features (end-to-end) | clean test, least sharp third
+    B_gain_sharp_high_end_to_end           +0.0034 [-0.0067, +0.0144]  CI includes 0  Gain from clinical features (end-to-end) | clean test, sharpest third
+    B_headroom_end_to_end                  +0.0470 [+0.0263, +0.0695]  CI above 0     Headroom-normalised gain, sum(gain) / sum(1 - AP image) (end-to-end) | 8 blur/downsampling
+    B_delta_unseen_end_to_end              +0.0069 [+0.0009, +0.0124]  CI above 0     Gain under these conditions minus gain on clean (end-to-end) | 5 JPEG/noise vs clean
+    B_delta_contrast_end_to_end            +0.0070 [-0.0008, +0.0150]  CI includes 0  Gain under these conditions minus gain on clean (end-to-end) | 2 low contrast vs clean
+    B_gain_sharp_low_minus_high_two_stage  -0.0081 [-0.0657, +0.0452]  CI includes 0  Natural quality: gain in the least sharp third minus gain in the sharpest third (two-stage) | clean test photos by measured sharpness
+    B_gain_sharp_low_minus_high_end_to_end +0.0028 [-0.0106, +0.0162]  CI includes 0  Natural quality: gain in the least sharp third minus gain in the sharpest third (end-to-end) | clean test photos by measured sharpness
+    B_fusion_vs_clinical_clean_two_stage   +0.2458 [+0.1309, +0.3587]  CI above 0     AP(image + clinical) - AP(clinical only) (two-stage): additional performance over the clinical model | clean
+    B_fusion_vs_clinical_seen_two_stage    +0.1529 [+0.0507, +0.2530]  CI above 0     AP(image + clinical) - AP(clinical only) (two-stage): additional performance over the clinical model | 8 blur/downsampling
+    B_fusion_vs_clinical_unseen_two_stage  +0.0971 [-0.0020, +0.1947]  CI includes 0  AP(image + clinical) - AP(clinical only) (two-stage): additional performance over the clinical model | 5 JPEG/noise
+    B_fusion_vs_clinical_contrast_two_stage +0.1717 [+0.0687, +0.2726]  CI above 0     AP(image + clinical) - AP(clinical only) (two-stage): additional performance over the clinical model | 2 low contrast
+    B_fusion_vs_clinical_inadequate_two_stage +0.2374 [-0.0019, +0.5157]  CI includes 0  AP(image + clinical) - AP(clinical only) (two-stage): additional performance over the clinical model | inadequate set
+    B_image_vs_clinical_seen_two_stage     +0.1019 [-0.0241, +0.2278]  CI includes 0  AP(image only) - AP(clinical only) (two-stage) | 8 blur/downsampling
+    B_fusion_vs_clinical_clean_end_to_end  +0.2142 [+0.0878, +0.3374]  CI above 0     AP(image + clinical) - AP(clinical only) (end-to-end): additional performance over the clinical model | clean
+    B_fusion_vs_clinical_seen_end_to_end   +0.1105 [-0.0128, +0.2326]  CI includes 0  AP(image + clinical) - AP(clinical only) (end-to-end): additional performance over the clinical model | 8 blur/downsampling
+    B_fusion_vs_clinical_unseen_end_to_end +0.0369 [-0.0885, +0.1607]  CI includes 0  AP(image + clinical) - AP(clinical only) (end-to-end): additional performance over the clinical model | 5 JPEG/noise
+    B_fusion_vs_clinical_contrast_end_to_end +0.1291 [+0.0009, +0.2542]  CI above 0     AP(image + clinical) - AP(clinical only) (end-to-end): additional performance over the clinical model | 2 low contrast
+    B_fusion_vs_clinical_inadequate_end_to_end +0.1751 [-0.1409, +0.5219]  CI includes 0  AP(image + clinical) - AP(clinical only) (end-to-end): additional performance over the clinical model | inadequate set
+    B_image_vs_clinical_seen_end_to_end    +0.0988 [-0.0271, +0.2240]  CI includes 0  AP(image only) - AP(clinical only) (end-to-end) | 8 blur/downsampling
+    NC_gain_val_two_stage                  -0.0049 [-0.0098, -0.0007]  CI below 0     Shuffled clinical: AP(image + shuffled) - AP(image) (two-stage); expected about 0 | validation (clean) | 10 permutations: -0.0100 to +0.0052
+    NC_real_minus_shuffled_val_two_stage   +0.0179 [-0.0119, +0.0493]  CI includes 0  AP(image + real clinical) - AP(image + shuffled clinical) (two-stage) | validation (clean)
+    NC_gain_clean_two_stage                -0.0022 [-0.0061, +0.0014]  CI includes 0  Shuffled clinical: AP(image + shuffled) - AP(image) (two-stage); expected about 0 | clean | 10 permutations: -0.0114 to +0.0077
+    NC_real_minus_shuffled_clean_two_stage +0.0412 [+0.0178, +0.0693]  CI above 0     AP(image + real clinical) - AP(image + shuffled clinical) (two-stage) | clean
+    NC_gain_seen_two_stage                 -0.0033 [-0.0088, +0.0019]  CI includes 0  Shuffled clinical: AP(image + shuffled) - AP(image) (two-stage); expected about 0 | 8 blur/downsampling | 10 permutations: -0.0133 to +0.0080
+    NC_real_minus_shuffled_seen_two_stage  +0.0543 [+0.0201, +0.0904]  CI above 0     AP(image + real clinical) - AP(image + shuffled clinical) (two-stage) | 8 blur/downsampling
+    NC_gain_val_end_to_end                 -0.0015 [-0.0061, +0.0028]  CI includes 0  Shuffled clinical: AP(image + shuffled) - AP(image) (end-to-end); expected about 0 | validation (clean)
+    NC_real_minus_shuffled_val_end_to_end  +0.0033 [-0.0023, +0.0095]  CI includes 0  AP(image + real clinical) - AP(image + shuffled clinical) (end-to-end) | validation (clean)
+    NC_gain_clean_end_to_end               +0.0013 [-0.0025, +0.0053]  CI includes 0  Shuffled clinical: AP(image + shuffled) - AP(image) (end-to-end); expected about 0 | clean
+    NC_real_minus_shuffled_clean_end_to_end +0.0072 [+0.0018, +0.0138]  CI above 0     AP(image + real clinical) - AP(image + shuffled clinical) (end-to-end) | clean
+    NC_gain_seen_end_to_end                +0.0020 [-0.0013, +0.0053]  CI includes 0  Shuffled clinical: AP(image + shuffled) - AP(image) (end-to-end); expected about 0 | 8 blur/downsampling
+    NC_real_minus_shuffled_seen_end_to_end +0.0096 [+0.0031, +0.0167]  CI above 0     AP(image + real clinical) - AP(image + shuffled clinical) (end-to-end) | 8 blur/downsampling
+    A_late_average_clean                   -0.0087 [-0.0243, +0.0022]  CI includes 0  AP late average minus AP two-stage LR (image + clinical) | clean
+    A_late_average_seen                    -0.0018 [-0.0203, +0.0169]  CI includes 0  AP late average minus AP two-stage LR (image + clinical) | 8 blur/downsampling
+
+  --- Layer 3 - how to fuse, and which features
+  * P2                                     +0.0424 [+0.0056, +0.0835]  CI above 0     P2: AP two-stage minus AP end-to-end (image + clinical) | 8 blur/downsampling
+    P2_part1_clean                         -0.0013 [-0.0047, +0.0017]  CI includes 0  P2 decomposition, part 1: AP two-stage minus AP hybrid (same LR fitting; image network trained alone vs jointly, plus its head and checkpoint) | clean
+    P2_part2_clean                         +0.0329 [+0.0110, +0.0588]  CI above 0     P2 decomposition, part 2: AP hybrid minus AP end-to-end (same image network; out-of-fold LR refit vs joint head, regularisation, preprocessing) | clean
+    P2_part1_seen                          -0.0028 [-0.0052, -0.0002]  CI below 0     P2 decomposition, part 1: AP two-stage minus AP hybrid (same LR fitting; image network trained alone vs jointly, plus its head and checkpoint) | 8 blur/downsampling
+    P2_part2_seen                          +0.0452 [+0.0141, +0.0779]  CI above 0     P2 decomposition, part 2: AP hybrid minus AP end-to-end (same image network; out-of-fold LR refit vs joint head, regularisation, preprocessing) | 8 blur/downsampling
+    B_P1_hybrid                            +0.0144 [-0.0040, +0.0331]  CI includes 0  P1 (hybrid): gain under blur/downsampling minus gain on clean photos | 8 blur/downsampling vs clean
+    B_missing_only_clean                   +0.0027 [-0.0048, +0.0106]  CI includes 0  Missing indicators only: AP(image + missing indicators) - AP(image) (two-stage) | clean
+    B_values_beyond_missing_clean          +0.0363 [+0.0147, +0.0624]  CI above 0     Clinical values beyond missingness: AP(image + all) - AP(image + missing indicators) (two-stage) | clean
+    B_missing_only_seen                    -0.0065 [-0.0183, +0.0049]  CI includes 0  Missing indicators only: AP(image + missing indicators) - AP(image) (two-stage) | 8 blur/downsampling
+    B_values_beyond_missing_seen           +0.0575 [+0.0258, +0.0910]  CI above 0     Clinical values beyond missingness: AP(image + all) - AP(image + missing indicators) (two-stage) | 8 blur/downsampling
+    P2_clean                               +0.0316 [+0.0108, +0.0557]  CI above 0     AP two-stage minus AP end-to-end (image + clinical) | clean
+    P2_unseen                              +0.0602 [+0.0236, +0.0973]  CI above 0     AP two-stage minus AP end-to-end (image + clinical) | 5 JPEG/noise
+    P2_contrast                            +0.0427 [+0.0077, +0.0791]  CI above 0     AP two-stage minus AP end-to-end (image + clinical) | 2 low contrast
+    P2_inadequate                          +0.0623 [-0.0182, +0.1706]  CI includes 0  AP two-stage minus AP end-to-end (image + clinical) | inadequate set
+    SENS_P1_two_stage_lr_c0.1              +0.0128 [-0.0050, +0.0316]  CI includes 0  P1 (two-stage) with LR C = 0.1 instead of 1 | 8 blur/downsampling vs clean
+    SENS_P2_lr_c0.1                        +0.0434 [+0.0141, +0.0749]  CI above 0     P2 with LR C = 0.1 instead of 1 | 8 blur/downsampling
+    SENS_P1_two_stage_lr_c10               +0.0116 [-0.0073, +0.0310]  CI includes 0  P1 (two-stage) with LR C = 10 instead of 1 | 8 blur/downsampling vs clean
+    SENS_P2_lr_c10                         +0.0419 [+0.0109, +0.0741]  CI above 0     P2 with LR C = 10 instead of 1 | 8 blur/downsampling
+
+  --- Layer 4 - after robust training: is clinical information still needed?
+    C1_P1_two_stage                        +0.0048 [-0.0094, +0.0189]  CI includes 0  C1: gain under blur/downsampling minus gain on clean (two-stage) | 8 blur/downsampling vs clean
+    C1_P1_change_two_stage                 -0.0071 [-0.0168, +0.0019]  CI includes 0  C1: change of that difference relative to standard training B (two-stage) | 8 blur/downsampling vs clean
+    C1_gain_clean_two_stage                +0.0441 [+0.0198, +0.0733]  CI above 0     C1: gain from clinical features (two-stage) | clean
+    C1_gain_seen_two_stage                 +0.0489 [+0.0193, +0.0803]  CI above 0     C1: gain from clinical features (two-stage) | 8 blur/downsampling
+    C1_P1_end_to_end                       +0.0031 [-0.0025, +0.0086]  CI includes 0  C1: gain under blur/downsampling minus gain on clean (end-to-end) | 8 blur/downsampling vs clean
+    C1_P1_change_end_to_end                -0.0000 [-0.0084, +0.0086]  CI includes 0  C1: change of that difference relative to standard training B (end-to-end) | 8 blur/downsampling vs clean
+    C1_gain_clean_end_to_end               +0.0099 [+0.0044, +0.0164]  CI above 0     C1: gain from clinical features (end-to-end) | clean
+    C1_gain_seen_end_to_end                +0.0130 [+0.0061, +0.0209]  CI above 0     C1: gain from clinical features (end-to-end) | 8 blur/downsampling
+    C1_P2                                  +0.0360 [+0.0108, +0.0639]  CI above 0     C1: AP two-stage minus AP end-to-end (image + clinical) | 8 blur/downsampling
+    C1_image_vs_B_clean                    -0.0003 [-0.0086, +0.0080]  CI includes 0  C1: image-only AP minus standard (B) image-only AP | clean
+    C1_image_vs_B_seen                     +0.0228 [+0.0120, +0.0346]  CI above 0     C1: image-only AP minus standard (B) image-only AP | 8 blur/downsampling
+    C1_image_vs_B_unseen                   +0.0173 [+0.0076, +0.0278]  CI above 0     C1: image-only AP minus standard (B) image-only AP | 5 JPEG/noise
+    C1_image_vs_B_contrast                 +0.0223 [+0.0077, +0.0378]  CI above 0     C1: image-only AP minus standard (B) image-only AP | 2 low contrast
+    C1_image_vs_B_inadequate               -0.0119 [-0.0458, +0.0161]  CI includes 0  C1: image-only AP minus standard (B) image-only AP | inadequate set
+    C2_P1_two_stage                        +0.0068 [-0.0079, +0.0212]  CI includes 0  C2: gain under blur/downsampling minus gain on clean (two-stage) | 8 blur/downsampling vs clean
+    C2_P1_change_two_stage                 -0.0052 [-0.0192, +0.0083]  CI includes 0  C2: change of that difference relative to standard training B (two-stage) | 8 blur/downsampling vs clean
+    C2_gain_clean_two_stage                +0.0450 [+0.0194, +0.0758]  CI above 0     C2: gain from clinical features (two-stage) | clean
+    C2_gain_seen_two_stage                 +0.0518 [+0.0175, +0.0879]  CI above 0     C2: gain from clinical features (two-stage) | 8 blur/downsampling
+    C2_P1_end_to_end                       +0.0099 [+0.0038, +0.0165]  CI above 0     C2: gain under blur/downsampling minus gain on clean (end-to-end) | 8 blur/downsampling vs clean
+    C2_P1_change_end_to_end                +0.0067 [+0.0000, +0.0144]  CI above 0     C2: change of that difference relative to standard training B (end-to-end) | 8 blur/downsampling vs clean
+    C2_gain_clean_end_to_end               +0.0106 [+0.0040, +0.0185]  CI above 0     C2: gain from clinical features (end-to-end) | clean
+    C2_gain_seen_end_to_end                +0.0205 [+0.0107, +0.0317]  CI above 0     C2: gain from clinical features (end-to-end) | 8 blur/downsampling
+    C2_P2                                  +0.0312 [+0.0053, +0.0590]  CI above 0     C2: AP two-stage minus AP end-to-end (image + clinical) | 8 blur/downsampling
+    C2_image_vs_B_clean                    -0.0037 [-0.0164, +0.0077]  CI includes 0  C2: image-only AP minus standard (B) image-only AP | clean
+    C2_image_vs_B_seen                     +0.0521 [+0.0253, +0.0824]  CI above 0     C2: image-only AP minus standard (B) image-only AP | 8 blur/downsampling
+    C2_image_vs_B_unseen                   +0.0449 [+0.0202, +0.0712]  CI above 0     C2: image-only AP minus standard (B) image-only AP | 5 JPEG/noise
+    C2_image_vs_B_contrast                 +0.0268 [+0.0076, +0.0468]  CI above 0     C2: image-only AP minus standard (B) image-only AP | 2 low contrast
+    C2_image_vs_B_inadequate               -0.0015 [-0.0537, +0.0534]  CI includes 0  C2: image-only AP minus standard (B) image-only AP | inadequate set
+    C2_vs_C1_image_clean                   -0.0034 [-0.0125, +0.0046]  CI includes 0  Degradation augmentation beyond basic augmentation: image-only AP, C2 minus C1 | clean
+    C2_vs_C1_image_seen                    +0.0293 [+0.0087, +0.0524]  CI above 0     Degradation augmentation beyond basic augmentation: image-only AP, C2 minus C1 | 8 blur/downsampling
+    C2_vs_C1_image_unseen                  +0.0277 [+0.0089, +0.0468]  CI above 0     Degradation augmentation beyond basic augmentation: image-only AP, C2 minus C1 | 5 JPEG/noise
+    C2_vs_C1_image_contrast                +0.0045 [-0.0082, +0.0172]  CI includes 0  Degradation augmentation beyond basic augmentation: image-only AP, C2 minus C1 | 2 low contrast
+    C2_vs_C1_image_inadequate              +0.0104 [-0.0361, +0.0662]  CI includes 0  Degradation augmentation beyond basic augmentation: image-only AP, C2 minus C1 | inadequate set
+
+  --- Layer 5 - quality-aware fusion: can the fusion shift weight actively?
+    D_qint_vs_plain_clean                  -0.0001 [-0.0035, +0.0030]  CI includes 0  Quality-interaction fusion (L, x, q, qL, qx) minus plain fusion (L, x) | clean
+    D_qint_vs_plain_seen                   +0.0000 [-0.0026, +0.0028]  CI includes 0  Quality-interaction fusion (L, x, q, qL, qx) minus plain fusion (L, x) | 8 blur/downsampling
+    D_qint_vs_plain_unseen                 -0.0023 [-0.0077, +0.0030]  CI includes 0  Quality-interaction fusion (L, x, q, qL, qx) minus plain fusion (L, x) | 5 JPEG/noise
+    D_qint_vs_plain_contrast               +0.0005 [-0.0017, +0.0027]  CI includes 0  Quality-interaction fusion (L, x, q, qL, qx) minus plain fusion (L, x) | 2 low contrast
+    D_qint_vs_plain_inadequate             -0.0055 [-0.0193, +0.0067]  CI includes 0  Quality-interaction fusion (L, x, q, qL, qx) minus plain fusion (L, x) | inadequate set
+    D_q_main_vs_plain_clean                -0.0008 [-0.0034, +0.0016]  CI includes 0  Quality main effect only (L, x, q) minus plain fusion (L, x) | clean
+    D_qint_vs_q_main_clean                 +0.0007 [-0.0015, +0.0029]  CI includes 0  Interactions beyond the main effect: (L, x, q, qL, qx) minus (L, x, q) | clean
+    D_qL_vs_q_main_clean                   +0.0003 [-0.0007, +0.0013]  CI includes 0  Quality x image interaction: (L, x, q, qL) minus (L, x, q) | clean
+    D_qx_beyond_qL_clean                   +0.0004 [-0.0014, +0.0023]  CI includes 0  Quality x clinical interactions: (L, x, q, qL, qx) minus (L, x, q, qL) | clean
+    D_image_q_vs_image_clean               -0.0038 [-0.0074, -0.0008]  CI below 0     Quality without clinical features: (L, q, qL) minus image only (L) | clean
+    D_qint_vs_image_q_clean                +0.0487 [+0.0230, +0.0801]  CI above 0     Clinical features given quality: (L, x, q, qL, qx) minus (L, q, qL) | clean
+    D_oracle_vs_plain_clean                +0.0014 [-0.0009, +0.0041]  CI includes 0  Reference with known synthetic severity (not guaranteed to be an upper bound): oracle interactions minus plain fusion | clean
+    D_q_main_vs_plain_seen                 +0.0001 [-0.0014, +0.0016]  CI includes 0  Quality main effect only (L, x, q) minus plain fusion (L, x) | 8 blur/downsampling
+    D_qint_vs_q_main_seen                  -0.0000 [-0.0021, +0.0020]  CI includes 0  Interactions beyond the main effect: (L, x, q, qL, qx) minus (L, x, q) | 8 blur/downsampling
+    D_qL_vs_q_main_seen                    -0.0003 [-0.0011, +0.0005]  CI includes 0  Quality x image interaction: (L, x, q, qL) minus (L, x, q) | 8 blur/downsampling
+    D_qx_beyond_qL_seen                    +0.0002 [-0.0016, +0.0022]  CI includes 0  Quality x clinical interactions: (L, x, q, qL, qx) minus (L, x, q, qL) | 8 blur/downsampling
+    D_image_q_vs_image_seen                -0.0005 [-0.0021, +0.0011]  CI includes 0  Quality without clinical features: (L, q, qL) minus image only (L) | 8 blur/downsampling
+    D_qint_vs_image_q_seen                 +0.0523 [+0.0190, +0.0876]  CI above 0     Clinical features given quality: (L, x, q, qL, qx) minus (L, q, qL) | 8 blur/downsampling
+    D_oracle_vs_plain_seen                 -0.0013 [-0.0042, +0.0016]  CI includes 0  Reference with known synthetic severity (not guaranteed to be an upper bound): oracle interactions minus plain fusion | 8 blur/downsampling
+
+Saved 14894 model x set x condition rows and 142 summaries to /tmp/claude-0/-home-claude/f6e7075a-cbad-552e-8c8d-00c55c6e6bc5/scratchpad/DR5/results_5bb/summary
+
+Dose check passed: averaged over the backbones and the two strongest levels, blur / downsampling lower the image-only validation AP by 0.288 (AP of a constant score = 0.229). This is a development check, not evidence for the hypotheses; report the rule and its result in the methods or appendix.

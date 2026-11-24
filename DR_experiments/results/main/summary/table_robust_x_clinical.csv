@@ -1,0 +1,7 @@
+pipeline,training,clean: image,clean: image+clinical,degraded: image,degraded: image+clinical
+two-stage,B (standard),0.8599,0.8989,0.7551,0.806
+two-stage,C1 (basic augmentation),0.8596,0.9037,0.7749,0.8238
+two-stage,C2 (basic + blur / downsampling),0.856,0.901,0.804,0.8558
+end-to-end,B (standard),0.8588,0.8674,0.7519,0.7636
+end-to-end,C1 (basic augmentation),0.8586,0.8685,0.7747,0.7878
+end-to-end,C2 (basic + blur / downsampling),0.8551,0.8657,0.8041,0.8246
